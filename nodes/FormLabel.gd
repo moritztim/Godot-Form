@@ -65,10 +65,7 @@ enum Mode {
 					break
 
 func _enter_tree():
-	ensure_text()
-
-func ensure_text():
-	if text in [null, ""]:
+	if input != null && text in [null, ""]:
 		text = input.name
 
 ## Add or remove the required_hint if input_required
