@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://nvp45g17tn43"
-path="res://.godot/imported/FormContainer.svg-14735197ac269b3d4ec4a638346df614.ctex"
+path="res://.godot/imported/FormContainer.svg-e5754cb1379f506b4ba32258645049dd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/godot-form/icons/FormContainer.svg"
-dest_files=["res://.godot/imported/FormContainer.svg-14735197ac269b3d4ec4a638346df614.ctex"]
+source_file="res://addons/form/icons/FormContainer.svg"
+dest_files=["res://.godot/imported/FormContainer.svg-e5754cb1379f506b4ba32258645049dd.ctex"]
 
 [params]
 

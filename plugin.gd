@@ -13,6 +13,12 @@ func _enter_tree():
 		["Validator", "Resource", preload("nodes/Validator.gd"), preload("icons/Validator.svg")],
 		["Boundaries", "Resource", preload("nodes/Boundaries.gd"), preload("icons/Boundaries.svg")],		
 		["ListFilter", "Resource", preload("nodes/ListFilter.gd"), preload("icons/ListFilter.svg")],
+		["Protocol", "Resource", preload("nodes/Protocol.gd"), preload("icons/Protocol.svg")],
+		["ApiProtocol", "Resource", preload("nodes/Protocols/ApiProtocol.gd"), preload("icons/ApiProtocol.svg")],
+		["HttpProtocol", "Resource", preload("nodes/Protocols/HttpProtocol.gd"), preload("icons/HttpProtocol.svg")],
+		["MailProtocol", "Resource", preload("nodes/Protocols/MailProtocol.gd"), preload("icons/MailProtocol.svg")],
+		["SmtpMailProtocol", "Resource", preload("nodes/Protocols/SmtpMailProtocol.gd"), preload("icons/SmtpMailProtocol.svg")],
+		["MailsendSmtpMailProtocol", "Resource", preload("nodes/Protocols/MailsendSmtpMailProtocol.gd"), preload("icons/MailsendSmtpMailProtocol.svg")]
 	])
 
 func add_custom_types(types: Array):

@@ -5,20 +5,7 @@ class_name FormLabel extends Label
 ## Input control to label
 @export var input: Control:
 	set(new_val):
-		if (
-			# if new_val is input button
-			( new_val is BaseButton
-			# meaning a button, but not one that just opens a popup
-			&&! new_val is MenuButton
-			)
-			# or new_val is input field
-			|| new_val is LineEdit
-			|| new_val is TextEdit
-			|| new_val is ItemList
-			|| new_val is Slider
-			|| new_val is SpinBox
-			|| new_val is GraphEdit
-			):
+		if FormContainer.is_input(new_val):
 			input = new_val
 			mode = mode # run setter
 			indicate_required()

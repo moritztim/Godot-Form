@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://plbq31j1n1cn"
-path="res://.godot/imported/FormLabel.svg-3810967523897b75a54a1f859f1fc596.ctex"
+path="res://.godot/imported/FormLabel.svg-f8f82b2681a1627b7c341a87bc537853.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/godot-form/icons/FormLabel.svg"
-dest_files=["res://.godot/imported/FormLabel.svg-3810967523897b75a54a1f859f1fc596.ctex"]
+source_file="res://addons/form/icons/FormLabel.svg"
+dest_files=["res://.godot/imported/FormLabel.svg-f8f82b2681a1627b7c341a87bc537853.ctex"]
 
 [params]
 

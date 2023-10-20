@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cot4782xei8cq"
-path="res://.godot/imported/ValidatableTextEdit.svg-d8adc7b14ee7956296b2bdc048440a11.ctex"
+uid="uid://cbym1v3ebuksf"
+path="res://.godot/imported/SmtpMailProtocol.svg-4ec97ea1c6c99b42258a3a0f3b45ab3e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/form/icons/ValidatableTextEdit.svg"
-dest_files=["res://.godot/imported/ValidatableTextEdit.svg-d8adc7b14ee7956296b2bdc048440a11.ctex"]
+source_file="res://addons/form/icons/SmtpMailProtocol.svg"
+dest_files=["res://.godot/imported/SmtpMailProtocol.svg-4ec97ea1c6c99b42258a3a0f3b45ab3e.ctex"]
 
 [params]
 
