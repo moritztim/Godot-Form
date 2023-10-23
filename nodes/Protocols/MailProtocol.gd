@@ -33,5 +33,29 @@ func generate_body(fields: Dictionary) -> String:
 			format_line = "<p><b> {key} </b>: {value} </p>"
 		elif body_format == BodyFormat.PLAIN_TEXT:
 			format_line += "\n"
-		body += format_line.format({"key": field, "value": fields[field]})
+		body += format_line.format({"key": field, "value": get_value(fields[field])})
 	return body + suffix
+
+func get_value(subject: Node) -> String:
+	var value = super.get_value(subject)
+	var string_value := ""
+
+	if subject is ItemList:
+		var suffix := ""
+		if body_format == BodyFormat.HTML:
+			string_value = "<ul>"
+			suffix = "</ul>"
+		elif body_format == BodyFormat.JSON:
+			string_value = "["
+		for item in value:
+			if body_format == BodyFormat.HTML:
+				string_value += "<li>{item}</li>".format({"item": item})
+			elif body_format == BodyFormat.JSON:
+				string_value += "{item},".format({"item": item})
+			else:
+				string_value += "{item}, ".format({"item": item})
+		return string_value + suffix
+	elif subject is GraphEdit:
+		return ", ".join(value)
+	else:
+		return str(value)

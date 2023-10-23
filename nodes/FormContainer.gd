@@ -11,11 +11,21 @@ func _ready():
 		submit_button.pressed.connect(submit)
 
 func submit():
+	protocol.submit(generate_fields_dict())
+
+func generate_fields_dict(subject: Node = self) -> Dictionary:
 	var fields := {}
-	for child in get_children():
-		if is_input(child):
-			fields[child.name] = child.value
-	protocol.submit(fields)
+	var labeled_inputs := []
+	for child in subject.get_children():
+		if child is FormLabel && child.input != null:
+			fields[child.text] = child.input
+			labeled_inputs.append(child.input)
+		elif child.get_child_count() > 0:
+			fields.merge(generate_fields_dict(child))
+	for child in subject.get_children():
+		if is_input(child) && ! labeled_inputs.has(child):
+			fields[child.name] = child
+	return fields
 
 static func is_input(subject: Node):
 	return (
