@@ -34,7 +34,7 @@ func handle_smtp(body: String) -> int:
 		args.append_array(["-log", log])
 	
 	args = args.map(func (arg):
-		if typeof(arg) == typeof(""):
+		if typeof(arg) == TYPE_STRING:
 			return arg.replace("\"", "\\\"")
 		else:
 			return arg

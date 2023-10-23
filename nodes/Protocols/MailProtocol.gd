@@ -40,7 +40,7 @@ func generate_body(fields: Dictionary) -> String:
 		var typed_value = super.get_value(fields[field])
 		var value := get_value(fields[field])
 		if body_format == BodyFormat.JSON:
-			if typeof(typed_value) == typeof(""):
+			if typeof(typed_value) == TYPE_STRING:
 				value = "\"" + value + "\""
 			if field == fields.keys().back():
 				format_line.replace(",", "")
