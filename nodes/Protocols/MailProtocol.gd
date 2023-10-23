@@ -47,6 +47,7 @@ func get_value(subject: Node) -> String:
 			suffix = "</ul>"
 		elif body_format == BodyFormat.JSON:
 			string_value = "["
+			suffix = "]"
 		for item in value:
 			if body_format == BodyFormat.HTML:
 				string_value += "<li>{item}</li>".format({"item": item})
