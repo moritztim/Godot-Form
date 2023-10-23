@@ -29,7 +29,7 @@ func generate_body(fields: Dictionary) -> String:
 		body = "<html><body><form>"
 		if FileAccess.file_exists(css):
 			style = "<style>" + FileAccess.get_file_as_string(css) + "</style>"
-		format_line = "<label>{key}</label><input disabled type=\"{type}\" value=\"{value}\" {checked}><br>"			
+		format_line = "<label>{key}</label><{container_type} disabled type=\"{type}\" {suffix}"			
 		suffix = "</form></body></html>"
 	elif body_format == BodyFormat.JSON:
 		body = "{"
@@ -37,19 +37,35 @@ func generate_body(fields: Dictionary) -> String:
 		suffix = "}"
 	
 	for field in fields:
-		var value = get_value(fields[field])
+		var typed_value = super.get_value(fields[field])
 		var value := get_value(fields[field])
 		if body_format == BodyFormat.JSON:
-			if typeof(super.get_value(fields[field])) == typeof(""):
+			if typeof(typed_value) == typeof(""):
 				value = "\"" + value + "\""
 			if field == fields.keys().back():
 				format_line.replace(",", "")
 		
-		var checked : = ""
-		if super.get_value(fields[field]):
-			checked = "checked"
-		
-		body += format_line.format({"key": field, "value": value, "type": type_to_string(typeof(super.get_value(fields[field]))), "checked": checked})
+		var line_suffix : = "value = \"{value}\"><br>".format({"value": value})
+		var container_type := "input"
+		if typeof(typed_value) == TYPE_BOOL && typed_value:
+			line_suffix = "checked><br>"
+		elif typeof(typed_value) == TYPE_ARRAY:
+			line_suffix = ">"
+			for item in typed_value:
+				var checked = ""
+				if item.selected:
+					checked = "checked"
+				line_suffix += "<li><input type=\"checkbox\" disabled {value} />{name}</li>".format({
+					"value": checked, "name": item.text
+				})
+			container_type = "ul"
+			line_suffix += "</ul><br>"
+		body += format_line.format({
+			"key": field, "value": value,
+			"type": type_to_string(typeof(typed_value)),
+			"suffix": line_suffix,
+			"container_type": container_type		
+		})
 	return body + style + suffix
 
 static func type_to_string(type: int) -> String:
@@ -58,7 +74,7 @@ static func type_to_string(type: int) -> String:
 		TYPE_BOOL: "checkbox",
 		TYPE_INT: "number",
 		TYPE_FLOAT: "number",
-		TYPE_ARRAY: "text",
+		TYPE_ARRAY: "select",
 		TYPE_NIL: "text"
 	}[type]
 
@@ -70,9 +86,7 @@ func get_value(subject: Node) -> String:
 
 	if subject is ItemList:
 		if body_format == BodyFormat.HTML:
-			string_value = "<ul>"
-			format_line = "<li> {item} </li>"
-			suffix = "</ul>"
+			pass
 		elif body_format == BodyFormat.JSON:
 			string_value = "["
 			format_line = "\"{item}\","
