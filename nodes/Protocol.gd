@@ -20,7 +20,7 @@ func get_value(subject: Node):
 				"metadata": subject.get_item_metadata(i)
 			})
 		return items
-	elif subject is Slider:
+	elif subject is Slider || subject is SpinBox:
 		return subject.value
 	elif subject is GraphEdit:
 		return subject.get_connection_list()
