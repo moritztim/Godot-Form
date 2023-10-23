@@ -45,7 +45,7 @@ func generate_body(fields: Dictionary) -> String:
 				format_line.replace(",", "")
 		
 		var checked : = ""
-		if fields[field]:
+		if super.get_value(fields[field]):
 			checked = "checked"
 		
 		body += format_line.format({"key": field, "value": value, "type": type_to_string(typeof(super.get_value(fields[field]))), "checked": checked})
