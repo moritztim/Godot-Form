@@ -38,6 +38,7 @@ func generate_body(fields: Dictionary) -> String:
 	
 	for field in fields:
 		var value = get_value(fields[field])
+		var value := get_value(fields[field])
 		if body_format == BodyFormat.JSON:
 			if typeof(super.get_value(fields[field])) == typeof(""):
 				value = "\"" + value + "\""
