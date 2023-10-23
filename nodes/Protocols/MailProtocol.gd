@@ -29,7 +29,7 @@ func generate_body(fields: Dictionary) -> String:
 		body = "<html><body><form>"
 		if FileAccess.file_exists(css):
 			style = "<style>" + FileAccess.get_file_as_string(css) + "</style>"
-		format_line = "<label for=\"{key}\">{key}</label><input disabled name=\"{key}\" type=\"{type}\" value=\"{value}\" {checked}><br>"			
+		format_line = "<label>{key}</label><input disabled type=\"{type}\" value=\"{value}\" {checked}><br>"			
 		suffix = "</form></body></html>"
 	elif body_format == BodyFormat.JSON:
 		body = "{"
