@@ -33,6 +33,12 @@ func handle_smtp(body: String) -> int:
 	if log != "":
 		args.append_array(["-log", log])
 	
+	args = args.map(func (arg):
+		if typeof(arg) == typeof(""):
+			return arg.replace("\"", "\\\"")
+		else:
+			return arg
+	)
 	print("Running ", " ", mailsend_executable_path, " \"", "\" \"".join(args), "\"")
 	var code = OS.execute(mailsend_executable_path, args, output, true)
 	print(output)
