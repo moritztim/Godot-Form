@@ -41,5 +41,6 @@ func handle_smtp(body: String) -> int:
 	)
 	print("Running ", " ", mailsend_executable_path, " \"", "\" \"".join(args), "\"")
 	var code = OS.execute(mailsend_executable_path, args, output, true)
-	print(output)
+	for line in output[0].split("\n"):
+		print("mailsend: ", line)
 	return code
