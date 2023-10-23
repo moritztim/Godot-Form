@@ -11,7 +11,15 @@ func get_value(subject: Node):
 	elif subject is LineEdit || subject is TextEdit:
 		return subject.text
 	elif subject is ItemList:
-		return subject.get_selected_items()
+		var items: Array[Dictionary] = []
+		for i in range(subject.get_item_count()):
+			items.append({
+				"selected": subject.is_selected(i),
+				"text": subject.get_item_text(i),
+				"icon": subject.get_item_icon(i),
+				"metadata": subject.get_item_metadata(i)
+			})
+		return items
 	elif subject is Slider || subject is SpinBox:
 		subject.value
 	elif subject is GraphEdit:
