@@ -21,7 +21,7 @@ func get_value(subject: Node):
 			})
 		return items
 	elif subject is Slider || subject is SpinBox:
-		subject.value
+		return subject.value
 	elif subject is GraphEdit:
 		return subject.get_connection_list()
 	else:
