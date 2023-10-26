@@ -39,22 +39,29 @@ func generate_body(fields: Dictionary) -> String:
 	for field in fields:
 		var typed_value = super.get_value(fields[field])
 		var value := get_value(fields[field])
+
+		# html specific
 		var line_suffix : = "value = \"{value}\"><br>".format({"value": value})
 		var container_type := "input"
+
 		if body_format == BodyFormat.JSON:
 			if typeof(typed_value) == TYPE_STRING:
 				value = "\"" + value + "\""
+			# remove trailing comma
 			if field == fields.keys().back():
 				format_line = format_line.replace(",", "")
 		elif body_format == BodyFormat.HTML:
+			# if the value is a boolean and true
 			if typeof(typed_value) == TYPE_BOOL && typed_value:
+				# the input will need the checked attribute but no value
 				line_suffix = "checked><br>"
 			elif typeof(typed_value) == TYPE_ARRAY:
 				line_suffix = ">"
 				for item in typed_value:
 					var checked = ""
-					if item.selected:
+					if item.selected: # set in Protocol.get_value()
 						checked = "checked"
+					# [x] item
 					line_suffix += "<li><input type=\"checkbox\" disabled {value} />{name}</li>".format({
 						"value": checked, "name": item.text
 					})
@@ -62,6 +69,7 @@ func generate_body(fields: Dictionary) -> String:
 				line_suffix += "</ul><br>"
 		body += format_line.format({
 			"key": field, "value": value,
+			# html specific
 			"type": type_to_string(typeof(typed_value)),
 			"suffix": line_suffix,
 			"container_type": container_type		
