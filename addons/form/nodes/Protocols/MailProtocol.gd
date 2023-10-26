@@ -1,4 +1,4 @@
-class_name MailProtocol extends Protocol
+class_name MailProtocol extends NetworkProtocol
 
 @export_group("Body")
 enum BodyFormat {

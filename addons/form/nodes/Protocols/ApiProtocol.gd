@@ -1,1 +1,1 @@
-class_name ApiProtocol extends Protocol
+class_name ApiProtocol extends NetworkProtocol
