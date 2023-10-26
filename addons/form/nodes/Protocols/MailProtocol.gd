@@ -45,7 +45,7 @@ func generate_body(fields: Dictionary) -> String:
 		var container_type := "input"
 
 		if body_format == BodyFormat.JSON:
-			if typeof(typed_value) == TYPE_STRING:
+			if typeof(typed_value) == TYPE_STRING || typeof(typed_value) == TYPE_NIL || typeof(typed_value) == TYPE_OBJECT:
 				value = "\"" + value + "\""
 			# remove trailing comma
 			if field == fields.keys().back():
@@ -88,19 +88,9 @@ static func type_to_string(type: int) -> String:
 
 func get_value(subject: Node) -> String:
 	var value = super.get_value(subject)
-	var string_value := ""
-	var suffix := ""
-	var format_line := "{item}"
-
-	if subject is ItemList:
-		if body_format == BodyFormat.JSON:
-			string_value = "["
-			format_line = "\"{item}\","
-			suffix = "]"
-		for item in value:
-			string_value += format_line.format({"item": item})
-		return string_value + suffix
-	elif subject is GraphEdit:
+	if subject is ItemList && body_format == BodyFormat.JSON:
+			return JSON.stringify(value)
+	elif subject is ItemList || subject is GraphEdit:
 		return ", ".join(value)
 	else:
 		return str(value)
