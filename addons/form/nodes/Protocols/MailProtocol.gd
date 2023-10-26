@@ -85,9 +85,7 @@ func get_value(subject: Node) -> String:
 	var format_line := "{item}"
 
 	if subject is ItemList:
-		if body_format == BodyFormat.HTML:
-			pass
-		elif body_format == BodyFormat.JSON:
+		if body_format == BodyFormat.JSON:
 			string_value = "["
 			format_line = "\"{item}\","
 			suffix = "]"
