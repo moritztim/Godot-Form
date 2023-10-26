@@ -1,5 +1,6 @@
-*
-!addons/form
+# for some reason * doesn't work so I have to use *.*
+*.*
+!addons/form/**/*
 !LICENSE
 !README*
 
