@@ -1,3 +1,8 @@
+*
+!addons/form
+!LICENSE
+!README*
+
 # Godot 4+ specific ignores
 .godot/
 
