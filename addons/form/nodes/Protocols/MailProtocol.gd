@@ -45,7 +45,7 @@ func generate_body(fields: Dictionary) -> String:
 			if typeof(typed_value) == TYPE_STRING:
 				value = "\"" + value + "\""
 			if field == fields.keys().back():
-				format_line.replace(",", "")
+				format_line = format_line.replace(",", "")
 		elif body_format == BodyFormat.HTML:
 			if typeof(typed_value) == TYPE_BOOL && typed_value:
 				line_suffix = "checked><br>"
