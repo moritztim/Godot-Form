@@ -1,1 +1,1 @@
-class_name ApiProtocol extends NetworkProtocol
+class_name ApiProtocol extends HTTPRequest
