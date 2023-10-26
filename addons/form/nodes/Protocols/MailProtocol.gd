@@ -39,14 +39,14 @@ func generate_body(fields: Dictionary) -> String:
 	for field in fields:
 		var typed_value = super.get_value(fields[field])
 		var value := get_value(fields[field])
+		var line_suffix : = "value = \"{value}\"><br>".format({"value": value})
+		var container_type := "input"
 		if body_format == BodyFormat.JSON:
 			if typeof(typed_value) == TYPE_STRING:
 				value = "\"" + value + "\""
 			if field == fields.keys().back():
 				format_line.replace(",", "")
 		elif body_format == BodyFormat.HTML:
-			var line_suffix : = "value = \"{value}\"><br>".format({"value": value})
-			var container_type := "input"
 			if typeof(typed_value) == TYPE_BOOL && typed_value:
 				line_suffix = "checked><br>"
 			elif typeof(typed_value) == TYPE_ARRAY:
@@ -60,12 +60,12 @@ func generate_body(fields: Dictionary) -> String:
 					})
 				container_type = "ul"
 				line_suffix += "</ul><br>"
-			body += format_line.format({
-				"key": field, "value": value,
-				"type": type_to_string(typeof(typed_value)),
-				"suffix": line_suffix,
-				"container_type": container_type		
-			})
+		body += format_line.format({
+			"key": field, "value": value,
+			"type": type_to_string(typeof(typed_value)),
+			"suffix": line_suffix,
+			"container_type": container_type		
+		})
 	return body + style + suffix
 
 static func type_to_string(type: int) -> String:
