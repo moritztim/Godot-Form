@@ -14,7 +14,6 @@ func _enter_tree():
 		["Boundaries", "Resource", preload("nodes/Boundaries.gd"), preload("icons/Boundaries.svg")],		
 		["ListFilter", "Resource", preload("nodes/ListFilter.gd"), preload("icons/ListFilter.svg")],
 		["Protocol", "Resource", preload("nodes/Protocol.gd"), preload("icons/Protocol.svg")],
-		["ApiProtocol", "Resource", preload("nodes/Protocols/ApiProtocol.gd"), preload("icons/ApiProtocol.svg")],
 		["HttpProtocol", "Resource", preload("nodes/Protocols/HttpProtocol.gd"), preload("icons/HttpProtocol.svg")],
 		["MailProtocol", "Resource", preload("nodes/Protocols/MailProtocol.gd"), preload("icons/MailProtocol.svg")],
 		["SmtpMailProtocol", "Resource", preload("nodes/Protocols/SmtpMailProtocol.gd"), preload("icons/SmtpMailProtocol.svg")],
