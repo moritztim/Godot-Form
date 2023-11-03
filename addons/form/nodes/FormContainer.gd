@@ -44,7 +44,7 @@ func generate_fields_dict(
 	return fields
 
 ## Returns whether the given node is an input.
-## Inputs are
+## Inputs are:
 ## - buttons except MenuButton
 ## - LineEdit
 ## - TextEdit
