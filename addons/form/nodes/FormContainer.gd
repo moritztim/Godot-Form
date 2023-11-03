@@ -52,7 +52,7 @@ func generate_fields_dict(
 ## - Slider
 ## - SpinBox
 ## - GraphEdit
-static func is_input(subject: Node):
+static func is_input(subject: Node) -> bool:
 	return (
 		# subject is input button
 		(
