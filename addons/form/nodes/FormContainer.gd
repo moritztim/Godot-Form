@@ -1,5 +1,5 @@
 @tool
-## Manages form submission and is intended to contain the form elements.
+## Manages form submission and is intended to contain the form elements and contains the is_input() method.
 class_name FormContainer extends Container
 
 @export_group("Submission")
