@@ -2,7 +2,10 @@
 class_name Protocol extends Resource
 
 ## Submits form data and returns HTTP status code of the response.
-func submit(fields: Dictionary) -> int:
+func submit(
+	## The output of FormContainer.generate_fields_dict().
+	fields: Dictionary
+) -> int:
 	push_error("not implemented")
 	return -1
 
@@ -18,7 +21,7 @@ func submit(fields: Dictionary) -> int:
 ##	icon: get_item_icon(): Texture,
 ##	metadata: get_item_metadata(): Variant
 ## }]
-func get_value(subject: Node):
+func get_value(subject: Node) -> Variant:
 	if subject is BaseButton:
 		return subject.button_pressed
 	elif subject is LineEdit || subject is TextEdit:
