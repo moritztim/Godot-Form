@@ -17,9 +17,9 @@ func submit(
 ## GraphEdit -> get_connection_list(): Array[Dictionary]
 ## ItemList -> items: Array[{
 ##	selected = is_selected(): bool,
-##	text: get_item_text(): String,
-##	icon: get_item_icon(): Texture,
-##	metadata: get_item_metadata(): Variant
+##	text = get_item_text(): String,
+##	icon = get_item_icon(): Texture,
+##	metadata = get_item_metadata(): Variant
 ## }]
 func get_value(subject: Node) -> Variant:
 	if subject is BaseButton:
