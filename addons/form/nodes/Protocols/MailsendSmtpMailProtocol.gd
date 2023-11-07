@@ -1,3 +1,5 @@
+## Handles form submission and response over the network using mailsend.
+## Mailsend must be installed.
 class_name MailsendSmtpMailProtocol extends SmtpMailProtocol
 
 @export var mailsend_executable_path = "mailsend-go"
@@ -10,7 +12,11 @@ class_name MailsendSmtpMailProtocol extends SmtpMailProtocol
 ## Write log messages to this file
 @export_global_file var log: String = ""
 
-func handle_smtp(body: String) -> int:
+# Calls mailsend with the given body and parameters based on the properties and returns the status code.
+func handle_smtp(
+	## E-mail body
+	body: String
+) -> int:
 	var output := []
 	var args := [
 		"-smtp", host, "-port", port,
