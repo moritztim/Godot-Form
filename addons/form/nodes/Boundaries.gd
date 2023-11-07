@@ -2,7 +2,7 @@
 ## An upper and lower bound for an integer value
 class_name Boundaries extends Resource
 
-## Minimum allowed value
+## Lower bound
 @export var min: int:
 	set(new_val):
 		if new_val > 0:
@@ -11,7 +11,7 @@ class_name Boundaries extends Resource
 			min = 0
 		if min > max:
 			max = min
-## Maximum allowed value
+## Upper bound
 @export var max: int:
 	set(new_val):
 		if new_val > 0:
