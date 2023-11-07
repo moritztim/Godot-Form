@@ -1,4 +1,5 @@
 @tool
+## An upper and lower bound for an integer value
 class_name Boundaries extends Resource
 
 ## Minimum allowed value
@@ -20,5 +21,6 @@ class_name Boundaries extends Resource
 		if max < min:
 			min = max
 
-func has(subject: int):
+## Determines if the subject is within the boundaries
+func has(subject: int) -> bool:
 	return (max == 0 || subject <= max) && (min == 0 || subject >= min)
