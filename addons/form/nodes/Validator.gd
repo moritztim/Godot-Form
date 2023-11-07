@@ -66,9 +66,9 @@ enum Behaviour {
 ## Custom Pattern to match against
 @export var custom := ".*"
 ## Normalise the case before matching
-@export var normalise = false
+@export var normalise := false
 ## Don't allow any more than one match
-@export var require_single_match: bool
+@export var require_single_match := false
 
 
 ## Validation passed (updated on text change)
