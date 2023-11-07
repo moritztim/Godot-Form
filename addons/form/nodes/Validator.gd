@@ -60,7 +60,7 @@ enum Behaviour {
 	## Input can match either the predefined or the custom regex (if at least one is set)
 	CAN_MATCH_EITHER = 1
 }
-## How predefined and custom regexes are checked against
+## How predefined and custom regexes are checked against in relation to each other.
 @export var behaviour: Behaviour
 
 ## Custom Pattern to match against
