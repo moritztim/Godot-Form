@@ -1,4 +1,5 @@
 @tool
+## Label for input controls
 class_name FormLabel extends Label
 
 
@@ -11,7 +12,7 @@ class_name FormLabel extends Label
 			indicate_required()
 		else:
 			printerr(get_class(),": input must be a input button or input field")
-## Input must have a value
+## "Input must have a value"
 @export var input_required := false:
 	set(new_val):
 		input_required = new_val
@@ -51,6 +52,7 @@ enum Mode {
 						input[prop] = ""
 					break
 
+## Sets the label text to the input's name if it is empty
 func _enter_tree():
 	if input != null && text in [null, ""]:
 		text = input.name
