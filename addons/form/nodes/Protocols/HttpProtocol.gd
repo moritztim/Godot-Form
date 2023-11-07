@@ -1,4 +1,6 @@
 @tool
+## Handles form submission and response over the network using HyperText Transfer Protocol
+## Web export is not supported.
 ## Based on tutorial https://docs.godotengine.org/en/stable/tutorials/networking/http_client_class.html#http-client-class
 class_name HttpProtocol extends NetworkProtocol
 
@@ -28,13 +30,14 @@ enum Method {
 	PATCH
 }
 ## HTTP Method
-@export var method:Method = Method.POST
+@export var method := Method.POST
 ## HTTP Headers
-@export var headers:Dictionary = {}
+@export var headers := {}
 
-var http = HTTPClient.new()
+## HTTP Client
+var http := HTTPClient.new()
 
-## Base URL {protocol}://{host}
+## {protocol}://{host}
 var base_url:String:
 	get:
 		var protocol := "http"
@@ -45,16 +48,23 @@ var base_url:String:
 			":".join([host, port])
 		])
 
-signal response_recieved(code:int, headers:Dictionary, body:PackedByteArray)
+signal response_recieved(
+	## HTTP Status Code
+	code:int,
+	headers:Dictionary,
+	body:PackedByteArray
+)
 
+## Sets the port to 443 if encrypt is true, otherwise 80, if it is set to -1.
 func _init():
 	if port == -1:
 		if encrypt:
 			port = 443
 		else:
 			port = 80
-	
 
+## Submits form data and returns HTTP status code of the response.
+## Web export is not supported.
 func submit(fields: Dictionary):
 	if OS.has_feature("web"):
 		push_error("Error: HttpProtocol does not support web export") # because that would require async code
@@ -122,7 +132,15 @@ func submit(fields: Dictionary):
 		print("No response")
 	return response_code
 
-func http_client_status_to_string(status:int) -> String:
+## Returns a string representation of the HTTPClient.STATUS_. or "Status: {status}" if the status is not one of the following:
+## 2. Error resolving host {host}
+## 4. Error connecting to host {host}:{port}
+## 8. Error in HTTP connection
+## 9. Error in TLS handshake
+func http_client_status_to_string(
+	## Status returned by HTTPClient.get_status()
+	status:int
+) -> String:
 	var error = "Error "
 	if status == HTTPClient.STATUS_CANT_RESOLVE:
 		error += "resolving host " + host
