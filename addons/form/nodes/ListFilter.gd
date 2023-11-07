@@ -7,7 +7,7 @@ enum Match {
 	## At least one element must be present
 	AT_LEAST_ONE = 0
 }
-## Match requirements
+## Match requirement
 @export var match: Match
 ## The blacklist or whitelist
 @export var elements: Array[String]
