@@ -1,4 +1,5 @@
 @tool
+## Handles form submission and response over the network.
 class_name NetworkProtocol extends Protocol
 
 @export_group("Target")
@@ -26,6 +27,7 @@ class_name NetworkProtocol extends Protocol
 ## Path to private key file
 @export_file var host_keyfile := ""
 
-func _init():
+## Tries to set host_username based on environment var, if not already set
+func _init() -> void:
 	if OS.has_environment("USERNAME"):
 		host_username = OS.get_environment("USERNAME")
