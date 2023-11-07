@@ -25,5 +25,5 @@ func is_represented_in(subject: String)-> bool:
 	return true
 
 ## Returns the output of elements.size()
-func size():
+func size() -> int:
 	return elements.size()
