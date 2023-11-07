@@ -1,25 +1,38 @@
+## Handles form submission and response over the network using E-Mail.
 class_name MailProtocol extends NetworkProtocol
 
 @export_group("Body")
 enum BodyFormat {
+	## HyperText Markup Language Form with disabled inputs
 	HTML,
+	## {key}: {value}
 	PLAIN_TEXT,
+	## JavaScript Object Notation
 	JSON
 }
 @export var body_format: BodyFormat = BodyFormat.HTML
+## Path to CSS file to use for styling regardless of body_format
 @export_file var css := "../../styles/default.css"
 
 @export_group("Metadata")
+## Sender name
 @export var from_name: String
+## Sender address
 @export var from_address: String
+## Recipient address
 @export var to_address: String
+## Subject line
 @export var subject: String
 
+## Submits form data in an E-Mail to the recipient and returns HTTP status code of the response.
 func submit(fields: Dictionary) -> int:
 	return super.submit(fields)
 
-## Generates an HTML string from a dictionary of fields
-func generate_body(fields: Dictionary) -> String:
+## Generates the body for the E-Mail in the body_format.
+func generate_body(
+	## Output of FormContainer.generate_fields_dict() to populate body
+	fields: Dictionary
+) -> String:
 	var body := ""
 	var style := ""
 	var suffix := ""
@@ -76,7 +89,17 @@ func generate_body(fields: Dictionary) -> String:
 		})
 	return body + style + suffix
 
-static func type_to_string(type: int) -> String:
+## Converts a type to a string for use in HTML form.
+## TYPE_STRING -> "text"
+## TYPE_BOOL -> "checkbox"
+## TYPE_INT -> "number"
+## TYPE_FLOAT -> "number"
+## TYPE_ARRAY -> "select"
+## TYPE_NIL -> "text"
+static func type_to_string(
+	## Output of typeof()
+	type: int
+) -> String:
 	return {
 		TYPE_STRING: "text",
 		TYPE_BOOL: "checkbox",
@@ -86,7 +109,8 @@ static func type_to_string(type: int) -> String:
 		TYPE_NIL: "text"
 	}[type]
 
-func get_value(subject: Node) -> String:
+## Returns the value of a node as a string for use in the E-Mail body.
+func get_value(subject: Node) -> Variant:
 	var value = super.get_value(subject)
 	if subject is ItemList && body_format == BodyFormat.JSON:
 			return JSON.stringify(value)
