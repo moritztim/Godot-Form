@@ -1,3 +1,11 @@
+# Example
+## In the Editor
+This is how a form might look in the editor: <br>
+![Form in the editor](addons/form/readme%20images/Editor_400.png)
+## In Action
+This is how the form might look in the game: <br>
+![Form in action](addons/form/readme%20images/Game_400.png)
+
 # Quick Start
 Get a form up and running in 10 steps.
 ## Installing the plugin
