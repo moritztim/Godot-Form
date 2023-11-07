@@ -1,6 +1,9 @@
 @tool
+## Validates Text Input according to rules about length and content
 class_name Validator extends Resource
 
+## A collection of predefined regular expression patterns.
+## Items correspond to the PredefinedRegEx enum.
 const REGEX_LIB = [
 	"^[a-zA-Z]+$",
 	"^[0-9]+$",
@@ -15,7 +18,8 @@ const REGEX_LIB = [
 @export_group("Rules")
 
 @export_subgroup("Simple Rules")
-## Input must have a value
+## "Input must have a value"
+## min_length will be adjusted if needed
 @export var required := false:
 	set(new_val):
 		if new_val:
@@ -25,9 +29,11 @@ const REGEX_LIB = [
 			else:
 				min_length = _prev_min_length
 		required = new_val
+
+## temporary storage of min_length used by the setter of required
 var _prev_min_length := 0
 ## Minimum number of characters
-@export var min_length: int:
+@export var min_length := 0:
 	set(new_val):
 		if new_val < 0:
 			new_val = 0
@@ -42,17 +48,19 @@ var _prev_min_length := 0
 @export var blacklist: ListFilter
 
 @export_subgroup("Regular Expression")
-## Predefined attern to match against
 enum PredefinedRegEx {NONE = -1,
-	ALPHABETICAL, NUMERICAL, ALPHANUMERICAL, EMAIL_ADDRESS, PHONE_NUMBER
+ALPHABETICAL, NUMERICAL, ALPHANUMERICAL, EMAIL_ADDRESS, PHONE_NUMBER
 }
+## Predefined pattern to match against
 @export var predefined: PredefinedRegEx = -1
+
 enum Behaviour {
 	## Input must match both the predefined and the custom regex (if both are set)
 	MUST_MATCH_BOTH = 0,
 	## Input can match either the predefined or the custom regex (if at least one is set)
 	CAN_MATCH_EITHER = 1
 }
+## How predefined and custom regexes are checked against
 @export var behaviour: Behaviour
 
 ## Custom Pattern to match against
@@ -65,17 +73,28 @@ enum Behaviour {
 
 ## Validation passed (updated on text change)
 var valid := false
+## Broken Rules with names and relevant value
 var broken_rules := {}
+## Compiled custom regex
 var user_regex: RegEx
 
+## Compiles the custom regex
 func _init() -> void:
 	user_regex = RegEx.new()
 	user_regex.compile(custom)
 
-func _on_text_changed(new_text: String) -> void:
+## Validates given text and updates valid property
+func _on_text_changed(
+	## New content of the input
+	new_text: String
+) -> void:
 	valid = validate(new_text)
 
-func validate(subject: String) -> bool:
+## Validates given text against all rules and returns validity
+func validate(
+	## Text to validate
+	subject: String
+) -> bool:
 	var _regex := RegEx.new()
 
 
