@@ -4,14 +4,15 @@ class_name FormContainer extends Container
 
 @export_group("Submission")
 ## Calls the submit() function when pressed.
-@export var submit_button: Submit
+@export var submit_button: Submit:
+	set(new_val):
+		if new_val != null:
+			new_val.pressed.connect(submit)
+		else:
+			submit_button.pressed.disconnect(submit)
+		submit_button = new_val
 ## Handles the submission of the form.
 @export var protocol:Protocol
-
-
-func _ready():
-	if submit_button != null:
-		submit_button.pressed.connect(submit)
 
 ## Submits the form data to the protocol.
 func submit():
