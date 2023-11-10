@@ -12,11 +12,14 @@ class_name FormLabel extends Label
 			indicate_required()
 		else:
 			printerr(get_class(),": input must be a input button or input field")
-## "Input must have a value"
+## "Input value must not be empty"
 @export var input_required := false:
 	set(new_val):
 		input_required = new_val
 		indicate_required()
+
+## "Input value must be true or non-boolean"
+@export var input_must_be_true := true
 
 @export_group("Input Display")
 
@@ -92,9 +95,9 @@ func indicate_validity(
 	var valid = default
 	# no input = not validatable -> valid = default
 	if input:
-		if !has_property(input, "text") || input.text == "":
-			# input is required but empty -> already invalid
-			if input_required:
+		if (!has_property(input, "text") && input_must_be_true) || input.text == "":
+			# input is required but empty or input must be true but is not -> valid = false
+			if input_required || (input_must_be_true && has_property(input, "button_pressed") && !input.button_pressed):
 				valid = false
 			# else: valid = default, but that's already done
 		# has text and validator -> valid = validate()
