@@ -23,7 +23,7 @@ func submit():
 			valid = false
 	if !valid:
 		return
-	protocol.submit(fields)
+	protocol.submit(generate_fields_dict())
 
 ## Generates a dictionary of the form data.
 func generate_fields_dict(
