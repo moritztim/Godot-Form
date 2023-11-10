@@ -18,6 +18,20 @@ class_name FormLabel extends Label
 		input_required = new_val
 		indicate_required()
 
+@export_group("Input Display")
+
+## The style to apply to the input when invalid
+@export var invalid_style: StyleBox
+
+## The style to apply to the input when valid
+var valid_style: StyleBox:
+	get:
+		if input && _valid_style == null:
+			_valid_style = input.get_stylebox("normal") 
+		return _valid_style
+## Internal storage for valid_style
+var _valid_style
+
 @export_group("Label Display")
 
 ## String to append to label if input_required
@@ -69,3 +83,37 @@ func indicate_required():
 		# remove
 		text = text.left(text.length() - required_hint.length())
 		mode = mode # run setter
+
+## Change style based on validity and return validity or default if input is not validatable
+func indicate_validity(
+	## the default value to return if input is not validatable
+	default := true
+) -> bool:
+	var valid = default
+	# no input = not validatable -> valid = default
+	if input:
+		if !has_property(input, "text") || input.text == "":
+			# input is required but empty -> already invalid
+			if input_required:
+				valid = false
+			# else: valid = default, but that's already done
+		# has text and validator -> valid = validate()
+		elif has_property(input, "validator"):
+			valid = input.validator.validate(input.text)
+		
+		if invalid_style != null:
+			var style = invalid_style
+			if valid:
+				style = valid_style
+			input.add_theme_stylebox_override("normal", style)
+		else:
+			var msg = "No invalid_style set"
+			if !valid:
+				push_warning(msg)
+			else:
+				print(msg)
+	return valid
+
+## Return validity of "Subject has property_name and it is not a method"
+func has_property(subject:Object, property_name) -> bool:
+	return property_name in subject && !subject.has_method(property_name)

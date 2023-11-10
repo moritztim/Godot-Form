@@ -14,12 +14,20 @@ class_name FormContainer extends Container
 ## Handles the submission of the form.
 @export var protocol:Protocol
 
-## Submits the form data to the protocol.
+## Submits the form data to the protocol if the data is valid.
 func submit():
-	protocol.submit(generate_fields_dict())
+	var fields := generate_fields_dict(true)
+	var valid := true
+	for field in fields.values():
+		if !field["label"].indicate_validity():
+			valid = false
+	if !valid:
+		return
+	protocol.submit(fields)
 
 ## Generates a dictionary of the form data.
 func generate_fields_dict(
+	include_labels: bool = false,
 	## The node to generate the dictionary from.
 	## This is mainly used for recursion.
 	subject: Node = self
@@ -30,18 +38,30 @@ func generate_fields_dict(
 	for child in subject.get_children():
 		# If the child is a label with an associated input, add it to the dictionary.
 		if child is FormLabel && child.input != null:
-			fields[child.text] = child.input
+			if include_labels:
+				fields[child.text] = {
+					"label": child,
+					"input": child.input,
+				}
+			else:
+				fields[child.text] = child.input
 			labeled_inputs.append(child.input)
 		# Else if the child serves as a container, recursively add its children.
 		elif child.get_child_count() > 0:
 			# Add the child's children to the dictionary as they are returned from the recursive call.
-			fields.merge(generate_fields_dict(child))
+			fields.merge(generate_fields_dict(include_labels, child))
 	
 	# Before we checked only inputs that have labels, so this adds the remaining ones.
 	for child in subject.get_children():
 		# If it's an input and it hasn't been added yet, add it.
 		if is_input(child) && ! labeled_inputs.has(child):
-			fields[child.name] = child
+			if include_labels:
+				fields[child.name] = {
+					"label": null,
+					"input": child,
+				}
+			else:
+				fields[child.name] = child
 	return fields
 
 ## Returns whether the given node is an input.
