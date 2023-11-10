@@ -30,7 +30,7 @@ class_name FormLabel extends Label
 var valid_style: StyleBox:
 	get:
 		if input && _valid_style == null:
-			_valid_style = input.get_stylebox("normal") 
+			_valid_style = input.get_theme_stylebox("normal") 
 		return _valid_style
 ## Internal storage for valid_style
 var _valid_style
