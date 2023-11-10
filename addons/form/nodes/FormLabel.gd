@@ -101,7 +101,7 @@ func indicate_validity(
 				valid = false
 			# else: valid = default, but that's already done
 		# has text and validator -> valid = validate()
-		elif has_property(input, "validator"):
+		elif has_property(input, "validator") && input.validator != null:
 			valid = input.validator.validate(input.text)
 		
 		if invalid_style != null:
