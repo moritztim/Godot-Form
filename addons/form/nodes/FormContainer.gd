@@ -58,7 +58,7 @@ func generate_fields_dict(
 	# Before we checked only inputs that have labels, so this adds the remaining ones.
 	for child in subject.get_children():
 		# If it's an input and it hasn't been added yet, add it.
-		if is_input(child) && ! labeled_inputs.has(child):
+		if FormContainer.is_input(child) && ! labeled_inputs.has(child):
 			if include_labels:
 				fields[child.name] = {
 					"label": null,
