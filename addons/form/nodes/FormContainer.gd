@@ -27,6 +27,10 @@ func submit():
 
 ## Generates a dictionary of the form data.
 func generate_fields_dict(
+	## if include_labels:
+	## return {{ "label": ..., "input": ... }, ... }
+	## else:
+	## return { input, ... }
 	include_labels: bool = false,
 	## The node to generate the dictionary from.
 	## This is mainly used for recursion.

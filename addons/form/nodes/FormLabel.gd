@@ -12,7 +12,7 @@ class_name FormLabel extends Label
 				input = new_val
 			mode = mode # run setter
 			indicate_required()
-			if validate_on_input:
+			if validate_on_input && input != null:
 				input.gui_input.connect(indicate_validity)
 		else:
 			printerr(get_class(),": input must be a input button or input field")
