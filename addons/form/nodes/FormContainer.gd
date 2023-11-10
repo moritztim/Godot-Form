@@ -19,7 +19,7 @@ func submit():
 	var fields := generate_fields_dict(true)
 	var valid := true
 	for field in fields.values():
-		if !field["label"].indicate_validity():
+		if !field["label"] != null && !field["label"].indicate_validity():
 			valid = false
 	if !valid:
 		return
@@ -28,9 +28,9 @@ func submit():
 ## Generates a dictionary of the form data.
 func generate_fields_dict(
 	## if include_labels:
-	## return {{ "label": ..., "input": ... }, ... }
+	## 	return { { "label": ..., "input": ... }, ... }
 	## else:
-	## return { input, ... }
+	## 	return { input, ... }
 	include_labels: bool = false,
 	## The node to generate the dictionary from.
 	## This is mainly used for recursion.
