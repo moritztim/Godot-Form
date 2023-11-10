@@ -7,9 +7,13 @@ class_name FormLabel extends Label
 @export var input: Control:
 	set(new_val):
 		if FormContainer.is_input(new_val):
-			input = new_val
+			if input != null:
+				input.gui_input.disconnect(indicate_validity)
+				input = new_val
 			mode = mode # run setter
 			indicate_required()
+			if validate_on_input:
+				input.gui_input.connect(indicate_validity)
 		else:
 			printerr(get_class(),": input must be a input button or input field")
 ## "Input value must not be empty"
@@ -20,6 +24,9 @@ class_name FormLabel extends Label
 
 ## "Input value must be true or non-boolean"
 @export var input_must_be_true := true
+
+## Indicate validity when the input node recieves a GUI input
+@export var validate_on_input := true
 
 @export_group("Input Display")
 
