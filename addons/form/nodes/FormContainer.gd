@@ -19,7 +19,7 @@ func submit():
 	var fields := generate_fields_dict(true)
 	var valid := true
 	for field in fields.values():
-		if !field["label"] != null && !field["label"].indicate_validity():
+		if field["label"] != null && !field["label"].indicate_validity():
 			valid = false
 	if !valid:
 		return
