@@ -21,7 +21,7 @@ func is_represented_in(subject: String)-> bool:
 			## else, keep looking
 		elif bool(match): ## If any element is not present but ALL must be, return false
 			return false
-	## if we get here it never happened that an element was not present and so both ALL and AT_LEAST_ONE are true.
+	## if we get here it never happened that an element was not present and so both ALL and AT_LEAST_ONE are satisfied.
 	return true
 
 ## Returns the output of elements.size()
