@@ -34,39 +34,55 @@ func generate_fields_dict(
 	include_labels: bool = false,
 	## The node to generate the dictionary from.
 	## This is mainly used for recursion.
-	subject: Node = self
+	subject: Node = self,
+	## The dictionary to add the fields to.
+	## This is mainly used for recursion.
+	fields := {}
 ) -> Dictionary:
-	var fields := {}
 	var labeled_inputs := []
 
+	print("Looping throug {0} children".format([subject.get_child_count()]))
 	for child in subject.get_children():
 		# If the child is a label with an associated input, add it to the dictionary.
 		if child is FormLabel && child.input != null:
+			var key := generate_unique_key(child, fields)
 			if include_labels:
-				fields[child.text] = {
+				fields[key] = {
 					"label": child,
 					"input": child.input,
 				}
 			else:
-				fields[child.text] = child.input
+				fields[key] = child.input
 			labeled_inputs.append(child.input)
 		# Else if the child serves as a container, recursively add its children.
 		elif child.get_child_count() > 0:
 			# Add the child's children to the dictionary as they are returned from the recursive call.
-			fields.merge(generate_fields_dict(include_labels, child))
+			fields.merge(generate_fields_dict(include_labels, child, fields))
 	
 	# Before we checked only inputs that have labels, so this adds the remaining ones.
 	for child in subject.get_children():
 		# If it's an input and it hasn't been added yet, add it.
 		if FormContainer.is_input(child) && ! labeled_inputs.has(child):
+			var key := generate_unique_key(child, fields)
 			if include_labels:
-				fields[child.name] = {
+				fields[key] = {
 					"label": null,
 					"input": child,
 				}
 			else:
-				fields[child.name] = child
+				fields[key] = child
+	print("found {0} fields".format([fields.size()]))
 	return fields
+
+## Generates a unique key for the subject to be used in the object.
+func generate_unique_key(subject: Node, object: Dictionary) -> StringName:
+	var key := subject.name
+	if key in object.keys(): # if there is already an input with this name, add the instance id to the key
+		var id = subject.get_instance_id()
+		key += &"_{0}".format([id]) # ensure StringName
+		if key in object.keys():
+			printerr("Duplicate input instance id: " + str(id) + ". Overwriting.")
+	return key
 
 ## Returns whether the given node is an input.
 ## Inputs are:
