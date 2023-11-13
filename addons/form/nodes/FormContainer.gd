@@ -26,6 +26,9 @@ func submit():
 	protocol.submit(generate_fields_dict())
 
 ## Generates a dictionary of the form data.
+## Keys are generated from the node names.
+## If a key with the same name already exists, the instance id is joined with an underscore to the key.
+## Example of a key with instance id: "Input_29460792527"
 func generate_fields_dict(
 	## if include_labels:
 	## 	return { { "label": ..., "input": ... }, ... }
