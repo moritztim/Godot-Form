@@ -67,6 +67,8 @@ enum Behaviour {
 @export var custom := ".*"
 ## Normalise the case before matching
 @export var normalise := false
+## Remove these strings from the subject before matching
+@export var remove: Array[String]
 ## Don't allow any more than one match
 @export var require_single_match := false
 
@@ -142,9 +144,12 @@ func validate(
 	##-- predefined_regex --##	
 	var predefined_regex_result := false
 
-		if normalise:
-			subject = subject.to_lower()
-		
+	if normalise:
+		subject = subject.to_lower()
+	if remove.size() > 0:
+		for item in remove:
+			subject = subject.replace(item, "")
+
 	if predefined != PredefinedRegEx.NONE:
 		_regex.compile(REGEX_LIB[predefined])
 		if _regex.search(subject) != null: # if there is a match
