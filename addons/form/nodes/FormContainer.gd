@@ -74,7 +74,6 @@ func generate_fields_dict(
 				}
 			else:
 				fields[key] = child
-	print("found {0} fields".format([fields.size()]))
 	return fields
 
 ## Generates a unique key for the subject to be used in the object.
