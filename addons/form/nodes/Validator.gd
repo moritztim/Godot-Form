@@ -143,6 +143,9 @@ func validate(
 	var predefined_regex_result := false
 
 	if predefined != PredefinedRegEx.NONE:
+		if normalise:
+			subject = subject.to_lower()
+		
 		_regex.compile(REGEX_LIB[predefined])
 		if _regex.search(subject) != null: # if there is a match
 			predefined_regex_result = true
