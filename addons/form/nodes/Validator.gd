@@ -135,6 +135,9 @@ func validate(
 		if count > word_range.max:
 			broken_rules["word_range"] = "max"
 			return false
+		elif count < word_range.min:
+			broken_rules["word_range"] = "min"
+			return false
 
 	##-- predefined_regex --##	
 	var predefined_regex_result := false
