@@ -44,7 +44,6 @@ func generate_fields_dict(
 ) -> Dictionary:
 	var labeled_inputs := []
 
-	print("Looping throug {0} children".format([subject.get_child_count()]))
 	for child in subject.get_children():
 		# If the child is a label with an associated input, add it to the dictionary.
 		if child is FormLabel && child.input != null:
