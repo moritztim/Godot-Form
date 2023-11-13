@@ -142,10 +142,10 @@ func validate(
 	##-- predefined_regex --##	
 	var predefined_regex_result := false
 
-	if predefined != PredefinedRegEx.NONE:
 		if normalise:
 			subject = subject.to_lower()
 		
+	if predefined != PredefinedRegEx.NONE:
 		_regex.compile(REGEX_LIB[predefined])
 		if _regex.search(subject) != null: # if there is a match
 			predefined_regex_result = true
@@ -160,9 +160,6 @@ func validate(
 	
 	##-- user_regex --##
 	if user_regex not in ["", null, ".*"]:
-		if normalise:
-			subject = subject.to_lower()
-
 		if require_single_match:
 			var matches = user_regex.search_all(subject)
 			if matches != null && matches.size() == 1 && matches[0].get_string() == subject.strip_edges():
