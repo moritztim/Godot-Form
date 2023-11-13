@@ -8,12 +8,12 @@ class_name FormLabel extends Label
 	set(new_val):
 		if FormContainer.is_input(new_val):
 			if input != null:
-				input.gui_input.disconnect(indicate_validity)
+				input.gui_input.disconnect(_on_gui_input)
 			input = new_val
 			mode = mode # run setter
 			indicate_required()
 			if validate_on_input && input != null:
-				input.gui_input.connect(indicate_validity.unbind(1))
+				input.gui_input.connect(_on_gui_input)
 		else:
 			printerr(get_class(),": input must be a input button or input field")
 ## "Input value must not be empty"
@@ -127,3 +127,16 @@ func indicate_validity(
 ## Return validity of "Subject has property_name and it is not a method"
 func has_property(subject:Object, property_name) -> bool:
 	return property_name in subject && !subject.has_method(property_name)
+
+## Indicate validity on GUI input if event is relevant and validate_on_input
+func _on_gui_input(event: InputEvent):
+		if validate_on_input && !(event is InputEventMouseMotion) && FormContainer.is_input(input) && (
+			event is InputEventMouseButton && (
+				input is BaseButton
+				|| input is Slider
+				|| input is SpinBox
+				|| input is GraphEdit
+			)
+			|| event is InputEventKey
+		):
+			indicate_validity()
