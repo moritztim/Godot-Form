@@ -134,7 +134,7 @@ func has_property(subject:Object, property_name) -> bool:
 ## Indicate validity on GUI input if event is relevant and validate_on_input
 func _on_gui_input(event: InputEvent):
 		if validate_on_input && !(event is InputEventMouseMotion) && FormContainer.is_input(input) && (
-			event is InputEventMouseButton && (
+			event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && !event.pressed  && ( # left click release
 				input is BaseButton
 				|| input is Slider
 				|| input is SpinBox
@@ -142,4 +142,4 @@ func _on_gui_input(event: InputEvent):
 			)
 			|| event is InputEventKey
 		):
-			indicate_validity()
+			indicate_validity.call_deferred() # ensure value is updated before validation
