@@ -95,6 +95,7 @@ func validate(
 	## Text to validate
 	subject: String
 ) -> bool:
+	broken_rules = {}
 	var _regex := RegEx.new()
 
 
