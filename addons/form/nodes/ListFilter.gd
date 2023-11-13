@@ -16,12 +16,12 @@ enum Match {
 func is_represented_in(subject: String)-> bool:
 	for element in elements:
 		if subject.contains(element):
-			if !bool(match): ## If any element is present and AT_LEAST_ONE must be, return true
+			if !bool(match): # If any element is present and AT_LEAST_ONE must be, return true
 				return true
 			## else, keep looking
-		elif bool(match): ## If any element is not present but ALL must be, return false
+		elif bool(match): # If any element is not present but ALL must be, return false
 			return false
-	## if we get here it never happened that an element was not present and so both ALL and AT_LEAST_ONE are satisfied.
+	# If we get here, all elements are present. Therefore both ALL and AT_LEAST_ONE are satisfied.
 	return true
 
 ## Returns the output of elements.size()
