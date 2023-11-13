@@ -80,6 +80,8 @@ func generate_fields_dict(
 ## Generates a unique key for the subject to be used in the object.
 func generate_unique_key(subject: Node, object: Dictionary) -> StringName:
 	var key := subject.name
+	if subject is FormLabel:
+		key = subject.text
 	if key in object.keys(): # if there is already an input with this name, add the instance id to the key
 		var id = subject.get_instance_id()
 		key += &"_{0}".format([id]) # ensure StringName
