@@ -141,14 +141,15 @@ func validate(
 
 	if predefined != PredefinedRegEx.NONE:
 		_regex.compile(REGEX_LIB[predefined])
-		if _regex.search(subject) != null:
+		if _regex.search(subject) != null: # if there is a match
 			predefined_regex_result = true
-			if behaviour == Behaviour.CAN_MATCH_EITHER:
-				return true
-		elif behaviour == Behaviour.MUST_MATCH_BOTH:
+			if behaviour == Behaviour.CAN_MATCH_EITHER:# if we only need one match
+				return true # return true, since this is the last check before user_regex, which we don't need to run, since we only need one match
+		elif behaviour == Behaviour.MUST_MATCH_BOTH: # if no match is found and we need both
 			broken_rules["predefined"] = Behaviour.keys()[behaviour]
 			return false
-	else:
+		# else we need both and there is no match, so we keep predefined_regex_result as false and continue to user_regex
+	else: # if there is no predefined regex, we don't need to run it
 		predefined_regex_result = true
 	
 	##-- user_regex --##
