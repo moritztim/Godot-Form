@@ -146,7 +146,7 @@ func validate(
 			if behaviour == Behaviour.CAN_MATCH_EITHER:
 				return true
 		elif behaviour == Behaviour.MUST_MATCH_BOTH:
-			broken_rules["predefined"] = str(behaviour)
+			broken_rules["predefined"] = Behaviour.keys()[behaviour]
 			return false
 	else:
 		predefined_regex_result = true
