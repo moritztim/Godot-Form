@@ -110,6 +110,8 @@ func indicate_validity(
 		# has text and validator -> valid = validate()
 		elif has_property(input, "validator") && input.validator != null:
 			valid = input.validator.validate(input.text)
+		else: # Has a text value or doesn't have to be true, has no validation rules. -> valid = true
+			valid = true
 		
 		if invalid_style != null:
 			var style = invalid_style

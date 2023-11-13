@@ -44,6 +44,12 @@ func submit(
 		push_error("File already exists.")
 		return 0
 	
+	var values = fields.values().map(func(input: Node):
+		return get_value(input)
+	)
+	for key in fields.keys():
+		fields[key] = values.pop_front()
+
 	var file := FileAccess.open(target_dir + "/" + file_name, FileAccess.WRITE)
 	file.store_string(JSON.stringify(fields))
 	file.close()
