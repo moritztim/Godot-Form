@@ -114,6 +114,7 @@ func indicate_validity(
 			valid = true
 		
 		if invalid_style != null:
+			valid_style # run getter
 			var style = invalid_style
 			if valid:
 				style = valid_style
