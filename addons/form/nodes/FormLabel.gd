@@ -102,17 +102,32 @@ func indicate_validity(
 	var valid = default
 	# no input = not validatable -> valid = default
 	if input:
-		if (!has_property(input, "text") && input_must_be_true) || input.text == "":
+		var broken_rules := {}
+		var value = Protocol.new().get_value(input)
+		var input_has_not_null_validator = has_property(input, "validator") && input.validator != null
+		var input_must_be_true_but_is_not = input_must_be_true && (value is bool) && !value
+		
+		if  (input_must_be_true_but_is_not) || (input_required && (value == null || (!(value is bool) && value == ""))):
 			# input is required but empty or input must be true but is not -> valid = false
-			if input_required || (input_must_be_true && has_property(input, "button_pressed") && !input.button_pressed):
+			if input_required || (input_must_be_true_but_is_not):
+				if input_must_be_true_but_is_not:
+					broken_rules["must be true"] = true
+				else:
+					broken_rules["required"] = true
 				valid = false
 			# else: valid = default, but that's already done
 		# has text and validator -> valid = validate()
-		elif has_property(input, "validator") && input.validator != null:
+		elif input_has_not_null_validator:
 			valid = input.validator.validate(input.text)
+			if !valid:
+				broken_rules = input.validator.broken_rules
 		else: # Has a text value or doesn't have to be true, has no validation rules. -> valid = true
 			valid = true
 		
+		if !valid:
+			print("Input ", input.get_instance_id(), " breaks the following rule(s):")
+			print(broken_rules)
+
 		if invalid_style != null:
 			valid_style # run getter
 			var style = invalid_style
