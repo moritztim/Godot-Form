@@ -6,10 +6,10 @@
 ## Example
 ### In the Editor
 This is how a form might look in the editor: <br>
-![Form in the editor](addons/form/readme%20images/Editor.png)
+![Form in the editor](readme%20images/Editor.png)
 ### In Action
 This is how the form might look in the game: <br>
-![Form in action](addons/form/readme%20images/Game_400.png)
+![Form in action](readme%20images/Game_400.png)
 
 ## Requirements
 - Godot 4.1 or higher
