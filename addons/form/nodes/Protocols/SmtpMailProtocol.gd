@@ -30,7 +30,7 @@ func _init() -> void:
 
 ## Returns handle_smtp(generate_body(fields)).
 func submit(
-	## Output of FormContainer.generate_fields_dict() to populate body
+	## Output of Form.generate_fields_dict() to populate body
 	fields:Dictionary
 ) -> int:
 	return handle_smtp(generate_body(fields))

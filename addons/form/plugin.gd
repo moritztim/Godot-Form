@@ -5,7 +5,7 @@ var _types: Array[String]
 
 func _enter_tree():
 	add_custom_types([
-		["FormContainer", "Container", preload("nodes/FormContainer.gd"), preload("icons/FormContainer.svg")],
+		["Form", "Control", preload("nodes/Form.gd"), preload("icons/Form.svg")],
 		["Submit", "Button", preload("nodes/Submit.gd"), preload("icons/Submit.svg")],
 		["ValidatableLineEdit", "LineEdit", preload("nodes/ValidatableLineEdit.gd"), preload("icons/ValidatableLineEdit.svg")],
 		["ValidatableTextEdit", "TextEdit", preload("nodes/ValidatableTextEdit.gd"), preload("icons/ValidatableTextEdit.svg")],

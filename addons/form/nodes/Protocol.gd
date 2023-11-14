@@ -3,7 +3,7 @@ class_name Protocol extends Resource
 
 ## Submits form data and returns HTTP status code of the response.
 func submit(
-	## The output of FormContainer.generate_fields_dict().
+	## The output of Form.generate_fields_dict().
 	fields: Dictionary
 ) -> int:
 	push_error("not implemented")

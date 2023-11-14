@@ -6,7 +6,7 @@ class_name FormLabel extends Label
 ## Input control to label
 @export var input: Control:
 	set(new_val):
-		if FormContainer.is_input(new_val):
+		if Form.is_input(new_val):
 			if input != null:
 				input.gui_input.disconnect(_on_gui_input)
 			input = new_val
@@ -146,7 +146,7 @@ func has_property(subject:Object, property_name) -> bool:
 
 ## Indicate validity on GUI input if event is relevant and validate_on_input
 func _on_gui_input(event: InputEvent):
-		if validate_on_input && !(event is InputEventMouseMotion) && FormContainer.is_input(input) && (
+		if validate_on_input && !(event is InputEventMouseMotion) && Form.is_input(input) && (
 			event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && !event.pressed  && ( # left click release
 				input is BaseButton
 				|| input is Slider

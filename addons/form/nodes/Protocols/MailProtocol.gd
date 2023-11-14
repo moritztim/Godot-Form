@@ -30,7 +30,7 @@ func submit(fields: Dictionary) -> int:
 
 ## Generates the body for the E-Mail in the body_format.
 func generate_body(
-	## Output of FormContainer.generate_fields_dict() to populate body
+	## Output of Form.generate_fields_dict() to populate body
 	fields: Dictionary
 ) -> String:
 	var body := ""

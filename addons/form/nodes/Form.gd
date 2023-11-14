@@ -1,6 +1,6 @@
 @tool
 ## Manages form submission and is intended to contain the form elements and contains the is_input() method.
-class_name FormContainer extends Container
+class_name Form extends Control
 
 @export_group("Submission")
 ## Calls the submit() function when pressed.
@@ -64,7 +64,7 @@ func generate_fields_dict(
 	# Before we checked only inputs that have labels, so this adds the remaining ones.
 	for child in subject.get_children():
 		# If it's an input and it hasn't been added yet, add it.
-		if FormContainer.is_input(child) && ! labeled_inputs.has(child):
+		if Form.is_input(child) && ! labeled_inputs.has(child):
 			var key := generate_unique_key(child, fields)
 			if include_labels:
 				fields[key] = {

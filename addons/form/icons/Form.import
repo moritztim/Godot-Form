@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cy3trehmy683u"
-path="res://.godot/imported/FormContainer.svg.svg-b37fb20f9d404f1e0e7cbd0e98290984.ctex"
+uid="uid://nvp45g17tn43"
+path="res://.godot/imported/Form.svg-e5754cb1379f506b4ba32258645049dd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/form/icons/FormContainer.svg.svg"
-dest_files=["res://.godot/imported/FormContainer.svg.svg-b37fb20f9d404f1e0e7cbd0e98290984.ctex"]
+source_file="res://addons/form/icons/Form.svg"
+dest_files=["res://.godot/imported/Form.svg-e5754cb1379f506b4ba32258645049dd.ctex"]
 
 [params]
 

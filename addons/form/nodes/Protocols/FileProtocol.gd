@@ -20,7 +20,7 @@ class_name FileProtocol extends Protocol
 
 ## Saves form data to a new file according to the file_name_scheme and returns 200.
 func submit(    
-	## The output of FormContainer.generate_fields_dict().
+	## The output of Form.generate_fields_dict().
 	fields: Dictionary
 ) -> int:
 	var submission_time := Time.get_date_dict_from_system()

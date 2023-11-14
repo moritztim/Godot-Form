@@ -21,15 +21,15 @@ Get a form up and running in 10 steps.
 ### Installing the plugin
 1. Install the plugin ~~from the Asset Library tab in Godot or from the [Asset Library Page](https://godotengine.org/asset-library/asset/9752) or~~ by following the [Installation](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Installation)  instructions.
 ### Creating the structure
-2. Add a [`FormContainer`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#FormContainer-container) to your scene.
-3. Add a `Container` of your choice as a child of the [`FormContainer`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#FormContainer-container) to hold the form elements.
+2. Add a [`Form`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#Form) to your scene.
+3. Add a `Container` of your choice as a child of the [`Form`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#Form) to hold the form elements.
 4. For each form element, add a [`FormLabel`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#formlabel--label) and any input `Control`.
 5. Finally, add a [`Submit`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#submit) button.
 ### Hooking everything up
-6. In the inspector of your [`FormContainer`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#FormContainer-container), set the [`Submit Button`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#submit_button-submit) property to your [`Submit`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#submit) button.
+6. In the inspector of your [`Form`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#Form), set the [`Submit Button`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#submit_button-submit) property to your [`Submit`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#submit) button.
 7. In the inspector of each element, set the [`input`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#input-control) property to the corresponding `Control` node.
 ### Configuring the form
-8. In the inspector of your [`FormContainer`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#FormContainer-container), choose and set up a [`Protocol`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#protocol-resource).
+8. In the inspector of your [`Form`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#Form), choose and set up a [`Protocol`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#protocol-resource).
     Currently supported protocols are:
     - [`HttpProtocol`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#httpprotocol-networkprotocol)
     - [`MailsendSmtPMailProtocol`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#mailsendsmtpmailprotocol-smtpmailprotocol-)
