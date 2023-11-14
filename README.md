@@ -11,6 +11,11 @@ This is how a form might look in the editor: <br>
 This is how the form might look in the game: <br>
 ![Form in action](addons/form/readme%20images/Game_400.png)
 
+## Requirements
+- Godot 4.1 or higher
+> Godot 4.0 might work, but is not tested.
+- For [`MailsendSmtPMailProtocol`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#mailsendsmtpmailprotocol-smtpmailprotocol-): [mailsend-go](https://github.com/muquit/mailsend-go) or [mailsend](https://github.com/muquit/mailsend)
+
 ## Quick Start
 Get a form up and running in 10 steps.
 ### Installing the plugin
