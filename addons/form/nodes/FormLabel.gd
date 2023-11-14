@@ -79,10 +79,11 @@ enum Mode {
 				visible = true
 
 
-## Sets the label text to the input's name if it is empty
+## Sets the label text to the input's name if it is empty and runs necessary setters
 func _enter_tree():
 	if input != null && text in [null, ""]:
 		text = input.name
+	mode = mode # run setter
 
 ## Add or remove the required_hint if input_required
 func indicate_required():
