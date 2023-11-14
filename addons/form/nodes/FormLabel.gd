@@ -84,12 +84,11 @@ func indicate_required():
 	if input_required && required_hint not in ["", null] && !text.ends_with(required_hint):
 		# add
 		text += required_hint
-		mode = mode # run setter
-	# if * present but not needed
+		# if * present but not needed
 	elif text.ends_with(required_hint):
 		# remove
 		text = text.left(text.length() - required_hint.length())
-		mode = mode # run setter
+	mode = mode # run setter
 
 ## Change style based on validity and return validity or default if input is not validatable
 func indicate_validity(
