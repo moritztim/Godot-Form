@@ -4,6 +4,7 @@
 !LICENSE
 !README*
 !icon.svg
+!icon.png
 
 # Godot 4+ specific ignores
 .godot/
