@@ -1,7 +1,7 @@
-<div style="text-align:center;">
-  <img src="https://raw.githubusercontent.com/moritz-t-w/Godot-Form-AL/main/icon.svg" alt="Icon">
-  <h1>Godot Form Plugin</h1>
-</div>
+<h1 align="center">
+  <img src="https://raw.githubusercontent.com/moritz-t-w/Godot-Form-AL/main/icon.svg" alt="Icon"> <br>
+  Godot Form Plugin
+</h1>
 
 ## Example
 ### In the Editor
