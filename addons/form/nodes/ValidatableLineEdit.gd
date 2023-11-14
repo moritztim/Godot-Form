@@ -1,5 +1,5 @@
 ## LineEdit with a validator.
-class_name VtableLineEdit extends LineEdit
+class_name ValidatableLineEdit extends LineEdit
 
 @export var validator: Validator
 
