@@ -23,6 +23,7 @@ Get a form up and running in 10 steps.
     Currently supported protocols are:
     - [`HttpProtocol`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#httpprotocol-networkprotocol)
     - [`MailsendSmtPMailProtocol`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#mailsendsmtpmailprotocol-smtpmailprotocol-)
+    - [`FileProtocol`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#fileprotocol-protocol)
 > Of course, you can also implement your own protocol by extending the [`Protocol`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#protocol-resource) class or any of its descendants.
 9. In the inspector of each [`FormLabel`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#formlabel--label), set the [`input_required`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#input_required-false) property if needed.
 10. In the inspector of each input `Control`, set and configure the [`Validator`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#validator-resource) property with rules.
