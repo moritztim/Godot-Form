@@ -22,9 +22,6 @@ class_name FormLabel extends Label
 		input_required = new_val
 		indicate_required()
 
-## "Input value must be true or non-boolean"
-@export var input_must_be_true := true
-
 ## Indicate validity when the input node recieves a GUI input
 @export var validate_on_input := true
 
@@ -105,15 +102,10 @@ func indicate_validity(
 		var broken_rules := {}
 		var value = Protocol.new().get_value(input)
 		var input_has_not_null_validator = has_property(input, "validator") && input.validator != null
-		var input_must_be_true_but_is_not = input_must_be_true && (value is bool) && !value
 		
-		if  (input_must_be_true_but_is_not) || (input_required && (value == null || (!(value is bool) && value == ""))):
-			# input is required but empty or input must be true but is not -> valid = false
-			if input_required || (input_must_be_true_but_is_not):
-				if input_must_be_true_but_is_not:
-					broken_rules["must be true"] = true
-				else:
-					broken_rules["required"] = true
+		if  input_required && (value == null || ((value is String || value is StringName) && value == "")):
+			# input is required but empty -> valid = false
+				broken_rules["required"] = true
 				valid = false
 			# else: valid = default, but that's already done
 		# has text and validator -> valid = validate()
