@@ -3,6 +3,7 @@
 !addons/form/**/*
 !LICENSE
 !README*
+!icon.svg
 
 # Godot 4+ specific ignores
 .godot/
