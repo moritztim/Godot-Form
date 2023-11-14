@@ -84,7 +84,7 @@ func indicate_required():
 	if input_required && required_hint not in ["", null] && !text.ends_with(required_hint):
 		# add
 		text += required_hint
-		# if * present but not needed
+	# if * present but not needed
 	elif text.ends_with(required_hint):
 		# remove
 		text = text.left(text.length() - required_hint.length())
