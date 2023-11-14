@@ -81,7 +81,7 @@ func _enter_tree():
 ## Add or remove the required_hint if input_required
 func indicate_required():
 	# if * needed but not present
-	if required_hint not in ["", null] && input_required && !text.ends_with(required_hint):
+	if input_required && required_hint not in ["", null] && !text.ends_with(required_hint):
 		# add
 		text += required_hint
 		mode = mode # run setter
