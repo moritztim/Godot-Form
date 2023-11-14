@@ -19,7 +19,7 @@ This is how the form might look in the game: <br>
 ## Quick Start
 Get a form up and running in 10 steps.
 ### Installing the plugin
-1. Install the plugin ~~from the Asset Library tab in Godot. Or~~ by following the [Installation](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Installation)  instructions.
+1. Install the plugin ~~from the Asset Library tab in Godot or from the [Asset Library Page](https://godotengine.org/asset-library/asset/9752) or~~ by following the [Installation](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Installation)  instructions.
 ### Creating the structure
 2. Add a [`FormContainer`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#FormContainer-container) to your scene.
 3. Add a `Container` of your choice as a child of the [`FormContainer`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#FormContainer-container) to hold the form elements.
