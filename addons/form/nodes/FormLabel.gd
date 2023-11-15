@@ -2,9 +2,25 @@
 ## Label for input controls
 class_name FormLabel extends Label
 
+## Path to input control
+@export_node_path(
+	"CheckBox",
+	"CheckButton",
+	"OptionButton",
+	"Submit",
+	"LineEdit",
+	"TextEdit",
+	"ItemList",
+	"Slider",
+	"SpinBox",
+	"GraphEdit"
+) var input_path: NodePath:
+	set(new_val):
+		input_path = new_val
+		input = get_node(input_path)
 
 ## Input control to label
-@export var input: Control:
+var input: Control:
 	set(new_val):
 		if Form.is_input(new_val):
 			if input != null:
@@ -15,7 +31,7 @@ class_name FormLabel extends Label
 			if validate_on_input && input != null:
 				input.gui_input.connect(_on_gui_input)
 		else:
-			printerr(get_class(),": input must be a input button or input field")
+			printerr(get_class(),": input must be a input button or input field.\nIf you set this using input_path, please report an issue because you should not have been able to select a non-input node.")
 ## "Input value must not be empty"
 @export var input_required := false:
 	set(new_val):
