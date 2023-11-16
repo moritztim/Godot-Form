@@ -11,6 +11,7 @@ func _enter_tree():
 		["ValidatableTextEdit", "TextEdit", preload("nodes/ValidatableTextEdit.gd"), preload("icons/ValidatableTextEdit.svg")],
 		["FormLabel", "Label", preload("nodes/FormLabel.gd"), preload("icons/FormLabel.svg")],
 		["Validator", "Resource", preload("nodes/Validator.gd"), preload("icons/Validator.svg")],
+		["StringValidator", "Validator", preload("nodes/Validators/StringValidator.gd"), preload("icons/Validator.svg")],
 		["Boundaries", "Resource", preload("nodes/Boundaries.gd"), preload("icons/Boundaries.svg")],		
 		["ListFilter", "Resource", preload("nodes/ListFilter.gd"), preload("icons/ListFilter.svg")],
 		["Protocol", "Resource", preload("nodes/Protocol.gd"), preload("icons/Protocol.svg")],
