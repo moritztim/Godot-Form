@@ -2,34 +2,9 @@
 ## Label for input controls
 class_name FormLabel extends Label
 
-## Path to input control
-@export_node_path(
-	"CheckBox",
-	"CheckButton",
-	"OptionButton",
-	"Submit",
-	"LineEdit",
-	"TextEdit",
-	"ItemList",
-	"Slider",
-	"SpinBox",
-	"GraphEdit"
-) var input_path: NodePath:
-	set(new_val):
-		_input_path = new_val
-		if is_inside_tree():
-			input = get_node_or_null(_input_path)
-	get:
-		if _input_path not in [null, ""] && input != null:
-			return input.get_path() # mainly for when u switched from a previous version that exported input.
-		return _input_path #TODO can't return null here, maybe there's another way. This is fine tho, I can't imagine a situation where input is null but input_path is not. 
-
-## Internal storage for input_path
-var _input_path: NodePath
 
 ## Input control to label
-## Must be an input according to Form.is_input or null
-var input: Control:
+@export var input: Control:
 	set(new_val):
 		if new_val == null ||  Form.is_input(new_val):
 			if input != null:
@@ -40,7 +15,7 @@ var input: Control:
 			if validate_on_input && input != null:
 				input.gui_input.connect(_on_gui_input)
 		else:
-			printerr(get_class(),": input must be a input button or input field.\nIf you set this using input_path, please report an issue because you should not have been able to select a non-input node.")
+			printerr(get_class(),": input must be a input button or input field")
 ## "Input value must not be empty"
 @export var input_required := false:
 	set(new_val):

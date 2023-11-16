@@ -27,7 +27,7 @@ Get a form up and running in 10 steps.
 5. Finally, add a [`Submit`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#submit) button.
 ### Hooking everything up
 6. In the inspector of your [`Form`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#Form), set the [`Submit Button`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#submit_button-submit) property to your [`Submit`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#submit) button.
-7. In the inspector of each element, point the [`input_path`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#input_path-nodepath) property to the corresponding `Control` node.
+7. In the inspector of each element, set the [`input`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#input-control) property to the corresponding `Control` node.
 ### Configuring the form
 8. In the inspector of your [`Form`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#Form), choose and set up a [`Protocol`](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Code-Reference#protocol-resource).
     Currently supported protocols are:
