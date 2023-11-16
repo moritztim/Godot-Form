@@ -93,7 +93,7 @@ func _on_text_changed(
 ## Validates given text against all rules and returns validity
 func validate(
 	## Text to validate
-	subject: String
+	subject: Object
 ) -> bool:
 	super.validate(subject)
 	var _regex := RegEx.new()
