@@ -96,6 +96,7 @@ func validate(
 	subject
 ) -> bool:
 	super.validate(subject)
+	subject = subject as String # this is guaranteed by super.validate(), which will throw an error if it's not compatible
 	var _regex := RegEx.new()
 
 
