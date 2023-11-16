@@ -10,12 +10,17 @@ class_name FormLabel extends Label
 			if input != null:
 				input.gui_input.disconnect(_on_gui_input)
 			input = new_val
+			nonstandard_input = false
 			mode = mode # run setter
 			indicate_required()
 			if validate_on_input && input != null:
 				input.gui_input.connect(_on_gui_input)
 		else:
-			printerr(get_class(),": input must be a input button or input field")
+			nonstandard_input = true
+
+## "The selected input is not an input according to Form.is_input() or null"
+@export var nonstandard_input := false
+
 ## "Input value must not be empty"
 @export var input_required := false:
 	set(new_val):
