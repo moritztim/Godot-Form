@@ -28,6 +28,7 @@ class_name FormLabel extends Label
 var _input_path: NodePath
 
 ## Input control to label
+## Must be an input according to Form.is_input or null
 var input: Control:
 	set(new_val):
 		if new_val == null ||  Form.is_input(new_val):
