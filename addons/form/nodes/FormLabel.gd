@@ -16,12 +16,16 @@ class_name FormLabel extends Label
 	"GraphEdit"
 ) var input_path: NodePath:
 	set(new_val):
-		input_path = new_val
-		input = get_node(input_path)
+		_input_path = new_val
+		if is_inside_tree():
+			input = get_node_or_null(_input_path)
 	get:
-		if input != null:
+		if _input_path not in [null, ""] && input != null:
 			return input.get_path() # mainly for when u switched from a previous version that exported input.
-		return input_path #TODO can't return null here, maybe there's another way. This is fine tho, I can't imagine a situation where input is null but input_path is not. 
+		return _input_path #TODO can't return null here, maybe there's another way. This is fine tho, I can't imagine a situation where input is null but input_path is not. 
+
+## Internal storage for input_path
+var _input_path: NodePath
 
 ## Input control to label
 var input: Control:
