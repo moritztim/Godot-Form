@@ -30,7 +30,7 @@ var _input_path: NodePath
 ## Input control to label
 var input: Control:
 	set(new_val):
-		if Form.is_input(new_val):
+		if new_val == null ||  Form.is_input(new_val):
 			if input != null:
 				input.gui_input.disconnect(_on_gui_input)
 			input = new_val
