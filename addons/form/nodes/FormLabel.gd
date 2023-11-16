@@ -19,7 +19,7 @@ class_name FormLabel extends Label
 			nonstandard_input = true
 
 ## "The selected input is not an input according to Form.is_input() or null"
-@export var nonstandard_input := false
+var nonstandard_input := false
 
 ## "Input value must not be empty"
 @export var input_required := false:
