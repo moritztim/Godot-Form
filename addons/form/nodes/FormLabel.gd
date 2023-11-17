@@ -30,7 +30,7 @@ var nonstandard_input := false
 				return
 			if input.get_theme_stylebox("normal") == null:
 				validator.style_valid = input.get_theme_stylebox("normal")
-			validator = new_val
+		validator = new_val
 
 ## Name of the property to validate
 ## if not set, value property will be searched in
