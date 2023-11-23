@@ -1,6 +1,15 @@
 ## Handles form submission and response over the network using E-Mail.
 class_name MailProtocol extends NetworkProtocol
 
+const HTML_SUBSTITUTES := {
+	"&": "&amp;", # must be first
+	
+	"\"": "&quot;",
+	"<": "&lt;",
+	">": "&gt;",
+	"'": "&apos;",
+}
+
 @export_group("Body")
 enum BodyFormat {
 	## HyperText Markup Language Form with disabled inputs
@@ -74,12 +83,16 @@ func generate_body(
 					var checked = ""
 					if item.selected: # set in Protocol.get_value()
 						checked = "checked"
+					var text = item.text
+					sanitize_for_html(text)
 					# [x] item
 					line_suffix += "<li><input type=\"checkbox\" disabled {value} />{name}</li>".format({
-						"value": checked, "name": item.text
+						"value": checked, "name": text
 					})
 				container_type = "ul"
 				line_suffix += "</ul><br>"
+			elif typeof(typed_value) == TYPE_STRING:
+				value = sanitize_for_html(value)
 		body += format_line.format({
 			"key": field, "value": value,
 			# html specific
@@ -118,3 +131,9 @@ func get_value(subject: Node) -> Variant:
 		return ", ".join(value)
 	else:
 		return str(value)
+
+## Sanitizes a string for use in HTML.
+func sanitize_for_html(subject: String) -> String:
+	for char in HTML_SUBSTITUTES.keys():
+		subject = subject.replace(char, HTML_SUBSTITUTES[char])
+	return subject
