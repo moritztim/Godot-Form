@@ -1,8 +1,10 @@
 ## Handles form submission and response.
 class_name Protocol extends Resource
 
+## Characters other than escape characters that can do bad things within a quoted shell command argument.
 const SHELL_BLACKLIST = "\"$%`!"
 
+## Characters that are probably fine inside a quoted shell command argument.
 const SHELL_WHITELIST = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_,.-+=@#/()'"
 
 @export_group("Security")
@@ -82,7 +84,7 @@ func sanitize(
 	## The sanitization method to use.
 	sanitization_override := sanitization,
 	## Whether to sanitize Dictionary keys. Note that this is passed down recursively.
-	sanitize_keys: bool = false
+	sanitize_keys := false
 ) -> Variant:
 	var sanitized := subject
 
