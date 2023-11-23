@@ -40,10 +40,11 @@ func handle_smtp(
 		args.append_array(["-log", log])
 	
 	args = args.map(func (arg):
-		if typeof(arg) == TYPE_STRING:
-			return arg.replace("\"", "\\\"")
-		else:
-			return arg
+		var _jail = []
+		var sanitized = sanitize(arg, _jail, sanitization, true)
+		if sanitization != Sanitization.SHELL_ESCAPE && sanitization != Sanitization.SHELL_BLACKLIST:
+			sanitized = sanitize(sanitized, _jail, Sanitization.SHELL_ESCAPE, true)
+		return sanitized
 	)
 	print("Running ", " ", mailsend_executable_path, " \"", "\" \"".join(args), "\"")
 	var code = OS.execute(mailsend_executable_path, args, output, true)
