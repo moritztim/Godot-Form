@@ -19,7 +19,7 @@ This is how the form might look in the game: <br>
 ## Quick Start
 Get a form up and running in 11 steps.
 ### Installing the plugin
-1. Install the plugin from the Asset Library tab in Godot or from the [Asset Library Page](https://godotengine.org/asset-library/asset/9752) or by following the [Installation](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Installation)  instructions. When the following prompt comes up, select only the "addons" folder: <br>
+1. Install the plugin from the Asset Library tab in Godot or from the [Asset Library Page](https://godotengine.org/asset-library/asset/2362) or by following the [Installation](https://github.com/moritz-t-w/Godot-Form-AL/wiki/Installation)  instructions. When the following prompt comes up, select only the "addons" folder: <br>
 	![Download only the addons folder](addons/form/readme%20images/Download.png)
 2. Enable the plugin in the Project Settings: <br>
 	![Enable the plugin](addons/form/readme%20images/Enable.png)
