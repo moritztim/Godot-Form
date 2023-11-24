@@ -52,7 +52,7 @@ func generate_body(
 	
 	for field in fields:
 		var typed_value = super.get_value(fields[field])
-		var value := get_value(fields[field])
+		var value = get_value(fields[field])
 
 		# html specific
 		var line_suffix : = "value = \"{value}\"><br>".format({"value": value})
