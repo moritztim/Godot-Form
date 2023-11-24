@@ -86,6 +86,9 @@ func _enter_tree():
 	visibility_changed.connect(update_display_mode)
 
 ## Update label display mode based on visibility
+## If the label is visible and the mode is either Mode.IN_INPUT or Mode.HIDDEN, the mode is set to Mode.SEPARATE.
+## If the label is not visible and the mode is Mode.SEPARATE, the mode is set to Mode.HIDDEN.
+## Else the mode setter is run (mode = mode).
 func update_display_mode():
 	if visible && (mode == Mode.IN_INPUT || mode == Mode.HIDDEN):
 		mode = Mode.SEPARATE
