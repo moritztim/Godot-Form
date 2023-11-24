@@ -38,16 +38,17 @@ func generate_body(
 	var suffix := ""
 	var format_line := "{key}: {value}\n"
 
-	if body_format == BodyFormat.HTML:
-		body = "<html><body><form>"
-		if FileAccess.file_exists(css):
-			style = "<style>" + FileAccess.get_file_as_string(css) + "</style>"
-		format_line = "<label>{key}</label><{container_type} disabled type=\"{type}\" {suffix}"			
-		suffix = "</form></body></html>"
-	elif body_format == BodyFormat.JSON:
-		body = "{"
-		format_line = "\"{key}\": {value},"
-		suffix = "}"
+	match body_format:
+		BodyFormat.HTML:
+			body = "<html><body><form>"
+			if FileAccess.file_exists(css):
+				style = "<style>" + FileAccess.get_file_as_string(css) + "</style>"
+			format_line = "<label>{key}</label><{container_type} disabled type=\"{type}\" {suffix}"			
+			suffix = "</form></body></html>"
+		BodyFormat.JSON:
+			body = "{"
+			format_line = "\"{key}\": {value},"
+			suffix = "}"
 	
 	for field in fields:
 		var typed_value = super.get_value(fields[field])
@@ -57,29 +58,32 @@ func generate_body(
 		var line_suffix : = "value = \"{value}\"><br>".format({"value": value})
 		var container_type := "input"
 
-		if body_format == BodyFormat.JSON:
-			if typeof(typed_value) == TYPE_STRING || typeof(typed_value) == TYPE_NIL || typeof(typed_value) == TYPE_OBJECT:
-				value = "\"" + value + "\""
-			# remove trailing comma
-			if field == fields.keys().back():
-				format_line = format_line.replace(",", "")
-		elif body_format == BodyFormat.HTML:
-			# if the value is a boolean and true
-			if typeof(typed_value) == TYPE_BOOL && typed_value:
-				# the input will need the checked attribute but no value
-				line_suffix = "checked><br>"
-			elif typeof(typed_value) == TYPE_ARRAY:
-				line_suffix = ">"
-				for item in typed_value:
-					var checked = ""
-					if item.selected: # set in Protocol.get_value()
-						checked = "checked"
-					# [x] item
-					line_suffix += "<li><input type=\"checkbox\" disabled {value} />{name}</li>".format({
-						"value": checked, "name": item.text
-					})
-				container_type = "ul"
-				line_suffix += "</ul><br>"
+		match body_format:
+			BodyFormat.JSON:
+				if typeof(typed_value) == TYPE_STRING || typeof(typed_value) == TYPE_NIL || typeof(typed_value) == TYPE_OBJECT:
+					value = "\"" + value + "\""
+				# remove trailing comma
+				if field == fields.keys().back():
+					format_line = format_line.replace(",", "")
+			BodyFormat.HTML:
+				# if the value is a boolean and true
+				match typeof(typed_value):
+					TYPE_BOOL:
+						if typed_value:
+							# the input will need the checked attribute but no value
+							line_suffix = "checked><br>"
+					TYPE_ARRAY:
+						line_suffix = ">"
+						for item in typed_value:
+							var checked = ""
+							if item.selected: # set in Protocol.get_value()
+								checked = "checked"
+							# [x] item
+							line_suffix += "<li><input type=\"checkbox\" disabled {value} />{name}</li>".format({
+								"value": checked, "name": item.text
+							})
+						container_type = "ul"
+						line_suffix += "</ul><br>"
 		body += format_line.format({
 			"key": field, "value": value,
 			# html specific
