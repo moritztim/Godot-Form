@@ -83,7 +83,17 @@ enum Mode {
 func _enter_tree():
 	if input != null && text in [null, ""]:
 		text = input.name
-	mode = mode # run setter
+	visibility_changed.connect(update_display_mode)
+
+## Update label display based on visibility
+func update_display_mode():
+	if visible && (mode == Mode.IN_INPUT || mode == Mode.HIDDEN):
+		mode = Mode.SEPARATE
+	elif !visible && mode == Mode.SEPARATE:
+		mode = Mode.HIDDEN
+	else:
+		# run setter
+		mode = mode
 
 ## Add or remove the required_hint if input_required
 func indicate_required():
