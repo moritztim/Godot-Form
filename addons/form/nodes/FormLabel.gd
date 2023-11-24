@@ -83,7 +83,8 @@ enum Mode {
 func _enter_tree():
 	if input != null && text in [null, ""]:
 		text = input.name
-	visibility_changed.connect(update_display_mode)
+	if !visibility_changed.is_connected(update_display_mode):
+		visibility_changed.connect(update_display_mode)
 
 ## Update label display mode based on visibility
 ## If the label is visible and the mode is either Mode.IN_INPUT or Mode.HIDDEN, the mode is set to Mode.SEPARATE.
