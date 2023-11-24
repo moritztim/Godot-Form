@@ -87,7 +87,7 @@ func generate_body(
 		body += format_line.format({
 			"key": field, "value": value,
 			# html specific
-			"type": type_to_string(typeof(typed_value)),
+			"type": MailProtocol.type_to_string(typeof(typed_value)),
 			"suffix": line_suffix,
 			"container_type": container_type		
 		})
