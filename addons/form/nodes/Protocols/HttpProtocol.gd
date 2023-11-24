@@ -141,15 +141,17 @@ func http_client_status_to_string(
 	## Status returned by HTTPClient.get_status()
 	status:int
 ) -> String:
-	var error = "Error "
-	if status == HTTPClient.STATUS_CANT_RESOLVE:
-		error += "resolving host " + host
-	elif status == HTTPClient.STATUS_CANT_CONNECT:
-		error += "connecting to host " + host + ":" + str(port)
-	elif status == HTTPClient.STATUS_CONNECTION_ERROR:
-		error += "in HTTP connection"
-	elif status == HTTPClient.STATUS_TLS_HANDSHAKE_ERROR:
-		error += "in TLS handshake"
-	else:
-		error += "Status: " + str(status)
-	return error
+	var error := "Error {0}"
+	var msg := ""
+	match status:
+		HTTPClient.STATUS_CANT_RESOLVE:
+			msg = "resolving host " + host
+		HTTPClient.STATUS_CANT_CONNECT:
+			msg = "connecting to host " + host + ":" + str(port)
+		HTTPClient.STATUS_CONNECTION_ERROR:
+			msg = "in HTTP connection"
+		HTTPClient.STATUS_TLS_HANDSHAKE_ERROR:
+			msg = "in TLS handshake"
+		_:
+			msg = "Status: " + str(status)
+	return error.format([msg])
