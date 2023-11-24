@@ -85,7 +85,7 @@ func _enter_tree():
 		text = input.name
 	visibility_changed.connect(update_display_mode)
 
-## Update label display based on visibility
+## Update label display mode based on visibility
 func update_display_mode():
 	if visible && (mode == Mode.IN_INPUT || mode == Mode.HIDDEN):
 		mode = Mode.SEPARATE
