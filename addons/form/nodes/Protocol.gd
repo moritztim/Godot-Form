@@ -117,18 +117,19 @@ func sanitize(
 			var escape_char = "\\"
 			if OS.get_name() == "Windows":
 				escape_char = "^" # Windows is not like the other kids
+			var os_specific_blacklist = "".join([SHELL_BLACKLIST, escape_char])
 			match sanitization_override:
 				Sanitization.NONE:
 					sanitized = subject
 				Sanitization.SHELL_ESCAPE:
 					for char in subject:
-						if char in SHELL_BLACKLIST.split().append(escape_char): # if it's a naughty char
+						if char in os_specific_blacklist: # if it's a naughty char
 							sanitized += escape_char # add escape char
 							jail.append(char)
 						sanitized += char # add char
 				Sanitization.SHELL_BLACKLIST:
 					for char in subject:
-						if !(char in SHELL_BLACKLIST.split().append(escape_char)): # if allowed
+						if !(char in os_specific_blacklist): # if allowed
 							sanitized += char # add char
 						else:
 							jail.append(char)
