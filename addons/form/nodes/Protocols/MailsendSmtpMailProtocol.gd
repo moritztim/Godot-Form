@@ -51,13 +51,11 @@ func sanitize_shell_args(
 	## Shell Command Args (passed by reference)
 	subject: Array[String],
 	## Stores every instance of every character that was caught by the sanitization in order of appearance (passed by reference)
-	jail: Array[String] = []
+	jail: Array = []
 ):
-	var i := 0
 	subject.map(func (arg):
-		var sanitized = sanitize(arg, jail[i], sanitization, true)
+		var sanitized = sanitize(arg, jail, sanitization, true)
 		if sanitization != Sanitization.SHELL_ESCAPE && sanitization != Sanitization.SHELL_BLACKLIST:
-			sanitized = sanitize(sanitized, jail[i], Sanitization.SHELL_ESCAPE, true)
-		i++
+			sanitized = sanitize(sanitized, jail, Sanitization.SHELL_ESCAPE, true)
 		return sanitized
 	)
