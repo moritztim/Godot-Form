@@ -106,7 +106,7 @@ func sanitize(
 		TYPE_STRING: # This is where the magic happens
 			sanitized = ""
 			# Blacklist
-			if blacklist not in [null]:
+			if blacklist not in [null, ""]:
 				var original_subject = subject
 				subject = ""
 				for char in original_subject:
