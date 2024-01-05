@@ -28,14 +28,14 @@ func compare(
 	## Expected value
 	expected,
 	## Name of test
-	name
+	test_name
 ):
-	if verbose: print("\n", "------", name, "------")
-	results[name] = actual == expected
+	if verbose: print("\n", "------", test_name, "------")
+	results[test_name] = actual == expected
 	if !verbose: return
 	print(
 		results.size(), " ",
-		"✅ passed" if results[name] else "❌ failed"
+		"✅ passed" if results[test_name] else "❌ failed"
 	)
 	print(
 		"\n 🟢 expected: \n", expected,
