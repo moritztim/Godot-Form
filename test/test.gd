@@ -1,6 +1,7 @@
 #gdscript
 class_name ClassTest extends Object
 ## Run all tests
+## Returns a Dictionary of test names and results
 func run() -> Dictionary:
 	return {}
 
