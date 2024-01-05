@@ -5,7 +5,7 @@ class_name Protocol extends Resource
 const SHELL_BLACKLIST = "\"$%`!"
 
 ## Characters that are probably fine inside a quoted shell command argument.
-const SHELL_WHITELIST = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_,.-+=@#/()'"
+const SHELL_WHITELIST = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_,.-+=@#/()'"
 
 @export_group("Security")
 enum Sanitization {
