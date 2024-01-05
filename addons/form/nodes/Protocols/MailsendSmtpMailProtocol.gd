@@ -53,7 +53,7 @@ func sanitize_shell_args(
 	## Stores every instance of every character that was caught by the sanitization in order of appearance (passed by reference)
 	jail: Array = []
 ):
-	subject.map(func (arg):
+	return subject.map(func (arg):
 		var sanitized = sanitize(arg, jail, sanitization, true)
 		if sanitization != Sanitization.SHELL_ESCAPE && sanitization != Sanitization.SHELL_BLACKLIST:
 			sanitized = sanitize(sanitized, jail, Sanitization.SHELL_ESCAPE, true)
