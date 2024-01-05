@@ -36,6 +36,10 @@ func run():
 	print("caught:\n", jail)
 	compare(
 		actual,
-		[ MailsendSmtpMailProtocol.SHELL_WHITELIST + "}", "}", MailsendSmtpMailProtocol.SHELL_WHITELIST + "}" ],
+		[
+			MailsendSmtpMailProtocol.SHELL_WHITELIST,
+			"}",
+			MailsendSmtpMailProtocol.SHELL_WHITELIST + "}"
+		],
 		"sanitize shell args with SHELL_BLACKLIST"
 	)
