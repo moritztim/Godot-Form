@@ -49,9 +49,9 @@ func handle_smtp(
 ## Sanitize subject for use as shell command args
 func sanitize_shell_args(
 	## Shell Command Args (passed by reference)
-	subject: String[],
+	subject: Array[String],
 	## Stores every instance of every character that was caught by the sanitization in order of appearance (passed by reference)
-	jail: String[] = []
+	jail: Array[String] = []
 ):
 	var i := 0
 	subject.map(func (arg):
