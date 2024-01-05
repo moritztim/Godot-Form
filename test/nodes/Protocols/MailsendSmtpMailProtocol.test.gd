@@ -14,6 +14,7 @@ func run():
 		"sanitize shell args with SHELL_ESCAPE"
 	)
 	instance.sanitization = MailsendSmtpMailProtocol.Sanitization.SHELL_WHITELIST
+	jail = []
 	actual = instance.sanitize_shell_args([
 		MailsendSmtpMailProtocol.SHELL_WHITELIST,
 		MailsendSmtpMailProtocol.SHELL_BLACKLIST + "}",
@@ -26,6 +27,7 @@ func run():
 		"sanitize shell args with SHELL_WHITELIST"
 	)
 	instance.sanitization = MailsendSmtpMailProtocol.Sanitization.SHELL_BLACKLIST
+	jail = []
 	actual = instance.sanitize_shell_args([
 		MailsendSmtpMailProtocol.SHELL_WHITELIST,
 		MailsendSmtpMailProtocol.SHELL_BLACKLIST + "}",
