@@ -1,7 +1,7 @@
 class_name MailsendSmtpMailProtocolTest extends ClassTest
 
 func run():
-	var instance = MailsendSmtpMailProtocol.new()
+	instance = MailsendSmtpMailProtocol.new()
 	instance.sanitization = MailsendSmtpMailProtocol.Sanitization.SHELL_ESCAPE
 	var jail = []
 	var actual = instance.sanitize_shell_args([

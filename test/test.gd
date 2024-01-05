@@ -4,6 +4,9 @@ class_name ClassTest extends Node
 ## Dictionary of test names and results
 var results = {}
 
+## Instance to run tests on
+var instance
+
 ## Print test results
 @export var verbose = true
 
