@@ -145,11 +145,12 @@ func sanitize(
 					var result := regex.search_all(subject)
 					var matches := []
 					for match in result:
-						matches.append(match.get_string())
+						var matchstr = match.get_string()
+						matches.append(matchstr)
+						jail.append(matchstr)
 					for char in subject:
-						if char in matches:
+						if !(char in matches):
 							sanitized += char
-							jail.append(char)
 	var size = jail.size()
 	if size > 0:
 		print("Protocol.sanitze() found ", size, " illegal characters in subject")
