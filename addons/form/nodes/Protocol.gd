@@ -122,13 +122,13 @@ func sanitize(
 					sanitized = subject
 				Sanitization.SHELL_ESCAPE:
 					for char in subject:
-						if char in [SHELL_BLACKLIST, escape_char]: # if it's a naughty char
+						if char in SHELL_BLACKLIST.split().append(escape_char): # if it's a naughty char
 							sanitized += escape_char # add escape char
 							jail.append(char)
 						sanitized += char # add char
 				Sanitization.SHELL_BLACKLIST:
 					for char in subject:
-						if !( char in [SHELL_BLACKLIST, escape_char] ): # if allowed
+						if !(char in SHELL_BLACKLIST.split().append(escape_char)): # if allowed
 							sanitized += char # add char
 						else:
 							jail.append(char)
