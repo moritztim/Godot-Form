@@ -37,6 +37,6 @@ func compare(
 		"✅ passed" if results[test_name] else "❌ failed"
 	)
 	print(
-		"\n 🟢 expected: \n", expected,
-		"\n 🔴 actual: \n", actual
+		"\n🟢 expected: \n", expected,
+		"\n🔴 actual: \n", actual
 	)
