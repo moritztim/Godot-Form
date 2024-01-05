@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://6cxcjnw6rt30"]
 
-[ext_resource type="Script" path="res://test/nodes/Protocols/MailsendSmtpMailProtocol.test.gd" id="1_3wh6k"]
+[ext_resource type="Script" path="res://test/nodes/Protocol.test.gd" id="1_dswwp"]
 
 [node name="Node" type="Node"]
-script = ExtResource("1_3wh6k")
+script = ExtResource("1_dswwp")
 
 [connection signal="ready" from="." to="." method="print_report"]
