@@ -30,11 +30,10 @@ func compare(
 	## Name of test
 	test_name
 ):
-	if verbose: print("\n", "------", test_name, "------")
+	if verbose: print("\n", "------", results.size(), ": ", test_name, "------")
 	results[test_name] = actual == expected
 	if !verbose: return
 	print(
-		results.size(), " ",
 		"✅ passed" if results[test_name] else "❌ failed"
 	)
 	print(
