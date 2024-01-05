@@ -5,4 +5,4 @@
 [node name="Node" type="Node"]
 script = ExtResource("1_iigvt")
 
-[connection signal="ready" from="." to="." method="run_verbose"]
+[connection signal="ready" from="." to="." method="print_repot"]
