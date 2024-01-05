@@ -110,10 +110,10 @@ func sanitize(
 				var original_subject = subject
 				subject = ""
 				for char in original_subject:
-					if char not in blacklist:
-						subject += char
-					else:
+					if char in blacklist:
 						jail.append(char)
+					else:
+						subject += char
 			
 			# Sanitization
 			var escape_char = "\\"
