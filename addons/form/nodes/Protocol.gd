@@ -86,8 +86,6 @@ func sanitize(
 	## Whether to sanitize Dictionary keys. Note that this is passed down recursively.
 	sanitize_keys := false
 ) -> Variant:
-	if sanitization_override == Sanitization.NONE || sanitization == Sanitization.NONE:
-		return subject
 	var sanitized := subject
 
 	
@@ -121,6 +119,8 @@ func sanitize(
 				escape_char = "^" # Windows is not like the other kids
 			var os_specific_blacklist = "".join([SHELL_BLACKLIST, escape_char])
 			match sanitization_override:
+				Sanitization.NONE:
+					sanitized = subject
 				Sanitization.SHELL_ESCAPE:
 					for char in subject:
 						if char in os_specific_blacklist: # if it's a naughty char
