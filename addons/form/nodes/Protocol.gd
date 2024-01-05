@@ -152,5 +152,5 @@ func sanitize(
 							jail.append(char)
 	var size = jail.size()
 	if size > 0:
-		print("Protocol.sanitze() found ", size, " illegal characters: in user input.")
+		print("Protocol.sanitze() found ", size, " illegal characters in subject")
 	return sanitized
