@@ -69,34 +69,34 @@ func generate_body(
 
 		match body_format:
 			BodyFormat.JSON:
-			if typeof(typed_value) == TYPE_STRING || typeof(typed_value) == TYPE_NIL || typeof(typed_value) == TYPE_OBJECT:
-				value = "\"" + value + "\""
-			# remove trailing comma
-			if field == fields.keys().back():
-				format_line = format_line.replace(",", "")
-		BodyFormat.HTML:
-			# if the value is a boolean and true
-			match typeof(typed_value)
-				TYPE_BOOL:
-				if typed_value:
-				# the input will need the checked attribute but no value
-				line_suffix = "checked><br>"
-			TYPE_ARRAY:
-				line_suffix = ">"
-				for item in typed_value:
-					var checked = ""
-					if item.selected: # set in Protocol.get_value()
-						checked = "checked"
-					var text = item.text
-					sanitize_for_html(text)
-					# [x] item
-					line_suffix += "<li><input type=\"checkbox\" disabled {value} />{name}</li>".format({
-						"value": checked, "name": text
-					})
-				container_type = "ul"
-				line_suffix += "</ul><br>"
-			TYPE_STRING:
-				value = sanitize_for_html(value)
+				if typeof(typed_value) == TYPE_STRING || typeof(typed_value) == TYPE_NIL || typeof(typed_value) == TYPE_OBJECT:
+					value = "\"" + value + "\""
+				# remove trailing comma
+				if field == fields.keys().back():
+					format_line = format_line.replace(",", "")
+			BodyFormat.HTML:
+				# if the value is a boolean and true
+				match typeof(typed_value):
+					TYPE_BOOL:
+						if typed_value:
+							# the input will need the checked attribute but no value
+							line_suffix = "checked><br>"
+					TYPE_ARRAY:
+						line_suffix = ">"
+						for item in typed_value:
+							var checked = ""
+							if item.selected: # set in Protocol.get_value()
+								checked = "checked"
+							var text = item.text
+							sanitize_for_html(text)
+							# [x] item
+							line_suffix += "<li><input type=\"checkbox\" disabled {value} />{name}</li>".format({
+								"value": checked, "name": text
+							})
+						container_type = "ul"
+						line_suffix += "</ul><br>"
+					TYPE_STRING:
+						value = sanitize_for_html(value)
 		body += format_line.format({
 			"key": field, "value": value,
 			# html specific
