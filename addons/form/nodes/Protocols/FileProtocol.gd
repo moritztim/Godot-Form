@@ -19,13 +19,11 @@ class_name FileProtocol extends Protocol
 @export var file_name_scheme := "{id}.json"
 
 ## Saves form data to a new file according to the file_name_scheme and returns 200.
-func submit(    
+func submit(
 	## The output of Form.generate_fields_dict().
 	fields: Dictionary
 ) -> int:
-	var submission_time := Time.get_date_dict_from_system()
-	submission_time.merge(Time.get_time_dict_from_system())
-	if (target_dir == "" || target_dir == null):
+	if (target_dir == ""||target_dir == null):
 		push_error("No target directory specified.")
 		return 0
 
@@ -33,12 +31,7 @@ func submit(
 		push_error("Target directory does not exist.")
 		return 0
 	
-	var format_dict = {
-		"id": DirAccess.get_files_at(target_dir).size() + 1,
-		"hash": fields.hash()
-	}
-	format_dict.merge(submission_time)
-	var file_name := file_name_scheme.format(format_dict)
+	var file_name := generate_file_name(fields)
 
 	if FileAccess.file_exists(target_dir + "/" + file_name):
 		push_error("File already exists.")
@@ -55,3 +48,14 @@ func submit(
 	file.close()
 
 	return 200
+
+func generate_file_name(fields: Dictionary) -> String:
+	var submission_time := Time.get_date_dict_from_system()
+	submission_time.merge(Time.get_time_dict_from_system())
+	var format_dict := {
+		"id": DirAccess.get_files_at(target_dir).size() + 1,
+		"hash": fields.hash()
+	}
+	format_dict.merge(submission_time)
+
+	return file_name_scheme.format(format_dict)
