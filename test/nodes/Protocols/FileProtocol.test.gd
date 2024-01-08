@@ -1,7 +1,7 @@
 class_name FileProtocolTest extends ClassTest
 
 func run():
-	var instance = FileProtocol.new()
+	instance = FileProtocol.new()
 	
 	instance.file_name_scheme = '{hash}-{id}-{year}-{month}-{day}-{weekday}-{hour}-{minute}-{second}.json'
 
