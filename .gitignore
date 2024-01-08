@@ -1,6 +1,7 @@
 # for some reason * doesn't work so I have to use *.*
 *.*
 !addons/form/**/*
+!test/**/*
 !LICENSE
 !README*
 !icon.svg

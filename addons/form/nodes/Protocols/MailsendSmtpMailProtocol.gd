@@ -39,14 +39,23 @@ func handle_smtp(
 	if log != "":
 		args.append_array(["-log", log])
 	
-	args = args.map(func (arg):
-		if typeof(arg) == TYPE_STRING:
-			return arg.replace("\"", "\\\"")
-		else:
-			return arg
-	)
+	sanitize_shell_args(args)
 	print("Running ", " ", mailsend_executable_path, " \"", "\" \"".join(args), "\"")
 	var code = OS.execute(mailsend_executable_path, args, output, true)
 	for line in output[0].split("\n"):
 		print("mailsend: ", line)
 	return code
+
+## Sanitize subject for use as shell command args
+func sanitize_shell_args(
+	## Shell Command Args (passed by reference)
+	subject: Array[String],
+	## Stores every instance of every character that was caught by the sanitization in order of appearance (passed by reference)
+	jail: Array = []
+):
+	return subject.map(func (arg):
+		var sanitized = sanitize(arg, jail, sanitization, true)
+		if sanitization != Sanitization.SHELL_ESCAPE && sanitization != Sanitization.SHELL_BLACKLIST:
+			sanitized = sanitize(sanitized, jail, Sanitization.SHELL_ESCAPE, true)
+		return sanitized
+	)
