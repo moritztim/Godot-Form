@@ -1,7 +1,7 @@
 class_name MailsendSmtpMailProtocolTest extends ClassTest
 
 func run():
-	var instance = MailsendSmtpMailProtocol.new() # I have no fucking clue why but if I use the prop instead of a local var I get "invalid type in function sanitize_shell_args" WHICH MAKES NO SENSE
+	var instance = MailsendSmtpMailProtocol.new() # TODO godot#86963
 	instance.sanitization = MailsendSmtpMailProtocol.Sanitization.SHELL_ESCAPE
 	var jail = []
 	var actual = instance.sanitize_shell_args([
