@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://6cxcjnw6rt30"]
 
-[ext_resource type="Script" path="res://test/nodes/Protocol.test.gd" id="1_dswwp"]
+[ext_resource type="Script" path="res://test/nodes/Protocols/FileProtocol.test.gd" id="1_i0l6y"]
 
 [node name="Node" type="Node"]
-script = ExtResource("1_dswwp")
+script = ExtResource("1_i0l6y")
 
 [connection signal="ready" from="." to="." method="print_report"]
