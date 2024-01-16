@@ -3,7 +3,7 @@ class_name MailProtocol extends NetworkProtocol
 
 const HTML_SUBSTITUTES := {
 	"&": "&amp;", # must be first
-	
+
 	"\"": "&quot;",
 	"<": "&lt;",
 	">": "&gt;",
@@ -52,24 +52,24 @@ func generate_body(
 			body = "<html><body><form>"
 			if FileAccess.file_exists(css):
 				style = "<style>" + FileAccess.get_file_as_string(css) + "</style>"
-			format_line = "<label>{key}</label><{container_type} disabled type=\"{type}\" {suffix}"			
+			format_line = "<label>{key}</label><{container_type} disabled type=\"{type}\" {suffix}"
 			suffix = "</form></body></html>"
 		BodyFormat.JSON:
 			body = "{"
 			format_line = "\"{key}\": {value},"
 			suffix = "}"
-	
+
 	for field in fields:
 		var typed_value = super.get_value(fields[field])
 		var value = get_value(fields[field])
 
 		# html specific
-		var line_suffix : = "value = \"{value}\"><br>".format({"value": value})
+		var line_suffix := "value = \"{value}\"><br>".format({"value": value})
 		var container_type := "input"
 
 		match body_format:
 			BodyFormat.JSON:
-				if typeof(typed_value) == TYPE_STRING || typeof(typed_value) == TYPE_NIL || typeof(typed_value) == TYPE_OBJECT:
+				if typeof(typed_value) == TYPE_STRING||typeof(typed_value) == TYPE_NIL||typeof(typed_value) == TYPE_OBJECT:
 					value = "\"" + value + "\""
 				# remove trailing comma
 				if field == fields.keys().back():
@@ -102,7 +102,7 @@ func generate_body(
 			# html specific
 			"type": MailProtocol.type_to_string(typeof(typed_value)),
 			"suffix": line_suffix,
-			"container_type": container_type		
+			"container_type": container_type
 		})
 	return body + style + suffix
 
@@ -129,9 +129,9 @@ static func type_to_string(
 ## Returns the value of a node as a string for use in the E-Mail body.
 func get_value(subject: Node) -> Variant:
 	var value = super.get_value(subject)
-	if subject is ItemList && body_format == BodyFormat.JSON:
+	if subject is ItemList&&body_format == BodyFormat.JSON:
 			return JSON.stringify(value)
-	elif subject is ItemList || subject is GraphEdit:
+	elif subject is ItemList||subject is GraphEdit:
 		return ", ".join(value)
 	else:
 		return str(value)

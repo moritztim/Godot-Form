@@ -30,13 +30,13 @@ func submit(
 	if DirAccess.dir_exists_absolute(target_dir) == false:
 		push_error("Target directory does not exist.")
 		return 0
-	
+
 	var file_name := generate_file_name(fields)
 
 	if FileAccess.file_exists(target_dir + "/" + file_name):
 		push_error("File already exists.")
 		return 0
-	
+
 	var values = fields.values().map(func(input: Node):
 		return get_value(input)
 	)

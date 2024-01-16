@@ -14,7 +14,6 @@ const REGEX_LIB = [
 	# source: ihateregex.io/expr/phone
 ]
 
-
 @export_group("Rules")
 
 @export_subgroup("Simple Rules")
@@ -37,7 +36,7 @@ var _prev_min_length := 0
 	set(new_val):
 		if new_val < 0:
 			new_val = 0
-		if new_val == 0 && required:
+		if new_val == 0&&required:
 			required = false
 		min_length = new_val
 ## Minimum and Maximum number of matches for \w+ allowed
@@ -72,7 +71,6 @@ enum Behaviour {
 ## Don't allow any more than one match
 @export var require_single_match := false
 
-
 ## Validation passed (updated on text change)
 var valid := false
 ## Broken Rules with names and relevant value
@@ -100,32 +98,29 @@ func validate(
 	broken_rules = {}
 	var _regex := RegEx.new()
 
-
 	##-- min_length --##
 	var length = subject.length()
 	if length < min_length:
 		broken_rules["min_length"] = str(length)
 		return false
 
-
 	##-- filter_list --##
 	if (
-		blacklist != null	&& blacklist.size() > 0
-		&& blacklist.is_represented_in(subject)
+		blacklist != null&&blacklist.size() > 0
+		&&blacklist.is_represented_in(subject)
 	):
 		broken_rules["filter_list"] = "blacklist"
 		return false
 
 	if (
-		whitelist != null	&& whitelist.size() > 0
-		&& !whitelist.is_represented_in(subject)
+		whitelist != null&&whitelist.size() > 0
+		&&!whitelist.is_represented_in(subject)
 	):
 		broken_rules["filter_list"] = "whitelist"
 		return false
 
-
 	##-- word_range --##
-	if word_range != null && (word_range.min != 0 || word_range.max != 0):
+	if word_range != null&&(word_range.min != 0||word_range.max != 0):
 		_regex.compile("\\w+") # word
 		var matches = _regex.search_all(subject)
 		if matches == null:
@@ -141,7 +136,7 @@ func validate(
 			broken_rules["word_range"] = "min"
 			return false
 
-	##-- predefined_regex --##	
+	##-- predefined_regex --##
 	var predefined_regex_result := false
 
 	if normalise:
@@ -154,7 +149,7 @@ func validate(
 		_regex.compile(REGEX_LIB[predefined])
 		if _regex.search(subject) != null: # if there is a match
 			predefined_regex_result = true
-			if behaviour == Behaviour.CAN_MATCH_EITHER:# if we only need one match
+			if behaviour == Behaviour.CAN_MATCH_EITHER: # if we only need one match
 				return true # return true, since this is the last check before user_regex, which we don't need to run, since we only need one match
 		elif behaviour == Behaviour.MUST_MATCH_BOTH: # if no match is found and we need both
 			broken_rules["predefined"] = Behaviour.keys()[behaviour]
@@ -162,14 +157,14 @@ func validate(
 		# else we need both and there is no match, so we keep predefined_regex_result as false and continue to user_regex
 	else: # if there is no predefined regex, we don't need to run it
 		predefined_regex_result = true
-	
+
 	##-- user_regex --##
 	if user_regex not in ["", null, ".*"]:
 		if require_single_match:
 			var matches = user_regex.search_all(subject)
-			if matches != null && matches.size() == 1 && matches[0].get_string() == subject.strip_edges():
+			if matches != null&&matches.size() == 1&&matches[0].get_string() == subject.strip_edges():
 				return true
-			return predefined_regex_result || bool(behaviour)
+			return predefined_regex_result||bool(behaviour)
 		elif user_regex.search(subject) != null:
 				return true
 	return true

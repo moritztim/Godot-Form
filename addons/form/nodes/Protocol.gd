@@ -36,7 +36,7 @@ func submit(
 	fields: Dictionary
 ) -> int:
 	push_error("not implemented")
-	return -1
+	return - 1
 
 ## Finds the value of the given Node based on its type.
 ## Throws an error if the type is unknown.
@@ -53,7 +53,7 @@ func submit(
 func get_value(subject: Node) -> Variant:
 	if subject is BaseButton:
 		return subject.button_pressed
-	elif subject is LineEdit || subject is TextEdit:
+	elif subject is LineEdit||subject is TextEdit:
 		return subject.text
 	elif subject is ItemList:
 		var items: Array[Dictionary] = []
@@ -65,7 +65,7 @@ func get_value(subject: Node) -> Variant:
 				"metadata": subject.get_item_metadata(i)
 			})
 		return items
-	elif subject is Slider || subject is SpinBox:
+	elif subject is Slider||subject is SpinBox:
 		return subject.value
 	elif subject is GraphEdit:
 		return subject.get_connection_list()
@@ -80,15 +80,14 @@ func sanitize(
 	## Any other type will be returned as is.
 	subject: Variant,
 	## Stores every instance of every character that was caught by the sanitization in order of appearance.
-	jail := [],
+	jail:=[],
 	## The sanitization method to use.
-	sanitization_override := sanitization,
+	sanitization_override:=sanitization,
 	## Whether to sanitize Dictionary keys. Note that this is passed down recursively.
-	sanitize_keys := false
+	sanitize_keys:=false
 ) -> Variant:
 	var sanitized := subject
 
-	
 	match typeof(subject):
 		TYPE_DICTIONARY:
 			sanitized = {}
@@ -112,7 +111,7 @@ func sanitize(
 						jail.append(char)
 					else:
 						subject += char
-			
+
 			# Sanitization
 			var escape_char = "\\"
 			if OS.get_name() == "Windows":
@@ -145,7 +144,7 @@ func sanitize(
 					var result := regex.search_all(subject)
 					var matches := []
 					for match in result:
-						var matchstr = match.get_string()
+						var matchstr = match .get_string()
 						matches.append(matchstr)
 						jail.append(matchstr)
 					for char in subject:

@@ -25,16 +25,15 @@ enum SecurityType {
 
 ## Sets the port based on the security type if it is -1.
 func _init() -> void:
-	if port == -1:
+	if port == - 1:
 		port = security_type
 
 ## Returns handle_smtp(generate_body(fields)).
 func submit(
 	## Output of Form.generate_fields_dict() to populate body
-	fields:Dictionary
+	fields: Dictionary
 ) -> int:
 	return handle_smtp(generate_body(fields))
-
 
 ## Handles the SMTP request and returns the status code.
 func handle_smtp(
@@ -42,4 +41,4 @@ func handle_smtp(
 	body: String
 ) -> int:
 	push_error("not implemented")
-	return -1
+	return - 1

@@ -2,7 +2,7 @@ class_name FileProtocolTest extends ClassTest
 
 func run():
 	instance = FileProtocol.new()
-	
+
 	instance.file_name_scheme = '{hash}-{id}-{year}-{month}-{day}-{weekday}-{hour}-{minute}-{second}.json'
 
 	# create temporary directory
@@ -13,7 +13,7 @@ func run():
 		instance.target_dir = '/tmp/godot-FileProtocol-test' + i
 		DirAccess.make_dir_absolute(instance.target_dir)
 		i += 1
-	
+
 	var format_dict = {
 		hash = {}.hash(),
 		id = 1

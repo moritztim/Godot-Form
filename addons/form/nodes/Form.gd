@@ -12,14 +12,14 @@ class_name Form extends Control
 			submit_button.pressed.disconnect(submit)
 		submit_button = new_val
 ## Handles the submission of the form.
-@export var protocol:Protocol
+@export var protocol: Protocol
 
 ## Submits the form data to the protocol if the data is valid.
 func submit():
 	var fields := generate_fields_dict(true)
 	var valid := true
 	for field in fields.values():
-		if field["label"] != null && !field["label"].indicate_validity():
+		if field["label"] != null&&!field["label"].indicate_validity():
 			valid = false
 	if !valid:
 		return
@@ -34,19 +34,19 @@ func generate_fields_dict(
 	## 	return { { "label": ..., "input": ... }, ... }
 	## else:
 	## 	return { input, ... }
-	include_labels: bool = false,
+	include_labels: bool=false,
 	## The node to generate the dictionary from.
 	## This is mainly used for recursion.
-	subject: Node = self,
+	subject: Node=self,
 	## The dictionary to add the fields to.
 	## This is mainly used for recursion.
-	fields := {}
+	fields:={}
 ) -> Dictionary:
 	var labeled_inputs := []
 
 	for child in subject.get_children():
 		# If the child is a label with an associated input, add it to the dictionary.
-		if child is FormLabel && child.input != null:
+		if child is FormLabel&&child.input != null:
 			var key := generate_unique_key(child, fields)
 			if include_labels:
 				fields[key] = {
@@ -60,11 +60,11 @@ func generate_fields_dict(
 		elif child.get_child_count() > 0:
 			# Add the child's children to the dictionary as they are returned from the recursive call.
 			fields.merge(generate_fields_dict(include_labels, child, fields))
-	
+
 	# Before we checked only inputs that have labels, so this adds the remaining ones.
 	for child in subject.get_children():
 		# If it's an input and it hasn't been added yet, add it.
-		if Form.is_input(child) && ! labeled_inputs.has(child):
+		if Form.is_input(child)&&!labeled_inputs.has(child):
 			var key := generate_unique_key(child, fields)
 			if include_labels:
 				fields[key] = {
@@ -102,13 +102,13 @@ static func is_input(subject: Node) -> bool:
 		(
 			subject is BaseButton
 			# meaning a button, but not one that just opens a popup
-			&&! subject is MenuButton
+			&&!subject is MenuButton
 		)
 		# or subject is input field
-		|| subject is LineEdit
-		|| subject is TextEdit
-		|| subject is ItemList
-		|| subject is Slider
-		|| subject is SpinBox
-		|| subject is GraphEdit
+		||subject is LineEdit
+		||subject is TextEdit
+		||subject is ItemList
+		||subject is Slider
+		||subject is SpinBox
+		||subject is GraphEdit
 	)

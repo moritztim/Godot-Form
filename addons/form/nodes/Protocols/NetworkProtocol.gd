@@ -7,11 +7,11 @@ class_name NetworkProtocol extends Protocol
 @export var host := "localhost"
 ## Target port
 ## -1 means "use default port"
-@export_range(-1, 65536) var port := -1:
+@export_range(-1, 65536) var port := - 1:
 	set(new_val):
 		if new_val >= 0:
 			new_val = new_val % 65536
-		elif new_val < -1:
+		elif new_val < - 1:
 			new_val = 0
 		port = new_val
 

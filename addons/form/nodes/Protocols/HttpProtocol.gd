@@ -9,7 +9,7 @@ class_name HttpProtocol extends NetworkProtocol
 @export var encrypt := true:
 	set(new_val):
 		encrypt = new_val
-		if port in [-1, 443, 80]:
+		if port in [- 1, 443, 80]:
 			if encrypt:
 				port = 443
 			else:
@@ -38,7 +38,7 @@ enum Method {
 var http := HTTPClient.new()
 
 ## {protocol}://{host}
-var base_url:String:
+var base_url: String:
 	get:
 		var protocol := "http"
 		if encrypt:
@@ -50,14 +50,14 @@ var base_url:String:
 
 signal response_recieved(
 	## HTTP Status Code
-	code:int,
-	headers:Dictionary,
-	body:PackedByteArray
+	code: int,
+	headers: Dictionary,
+	body: PackedByteArray
 )
 
 ## Sets the port to 443 if encrypt is true, otherwise 80, if it is set to -1.
 func _init():
-	if port == -1:
+	if port == - 1:
 		if encrypt:
 			port = 443
 		else:
@@ -71,7 +71,7 @@ func submit(fields: Dictionary):
 		return
 
 	var err = 0
-	var headers_arr:Array = []
+	var headers_arr: Array = []
 	var response_code = 0
 	for key in headers:
 		headers_arr.append(key + ": " + headers[key])
@@ -80,35 +80,34 @@ func submit(fields: Dictionary):
 	if err != OK:
 		push_error("Error ", err, " connecting to host ", host, ":", port)
 		return
-	
-	while http.get_status() == HTTPClient.STATUS_CONNECTING || http.get_status() == HTTPClient.STATUS_RESOLVING:
+
+	while http.get_status() == HTTPClient.STATUS_CONNECTING||http.get_status() == HTTPClient.STATUS_RESOLVING:
 		http.poll()
 		if http.get_status() == HTTPClient.STATUS_CONNECTING:
 			print("Connecting...")
 		else:
 			print("Resolving...")
 		OS.delay_msec(100)
-	
+
 	if http.get_status() != HTTPClient.STATUS_CONNECTED:
 		push_error(http_client_status_to_string(http.get_status()))
 
-	
 	err = http.request(int(method), path, headers_arr, JSON.stringify(fields))
 	if err != OK:
 		push_error("Error ", err, " sending request to '", path, "'")
 		return
-	
+
 	while http.get_status() == HTTPClient.STATUS_CONNECTING:
 		http.poll()
 		print("Connecting...")
 		OS.delay_msec(100)
-	
+
 	while http.get_status() == HTTPClient.STATUS_REQUESTING:
 		http.poll()
 		print("Requesting...")
 		OS.delay_msec(100)
-	
-	if http.get_status() != HTTPClient.STATUS_BODY && http.get_status() != HTTPClient.STATUS_CONNECTED:
+
+	if http.get_status() != HTTPClient.STATUS_BODY&&http.get_status() != HTTPClient.STATUS_CONNECTED:
 		push_error(http_client_status_to_string(http.get_status()))
 		return
 
@@ -126,7 +125,7 @@ func submit(fields: Dictionary):
 				OS.delay_usec(1000) # wait for buffers to fill
 			else:
 				data += chunk
-		
+
 		response_recieved.emit(response_code, http.get_response_headers_as_dictionary(), data)
 	else:
 		print("No response")
@@ -139,7 +138,7 @@ func submit(fields: Dictionary):
 ## 9. Error in TLS handshake
 func http_client_status_to_string(
 	## Status returned by HTTPClient.get_status()
-	status:int
+	status: int
 ) -> String:
 	var error := "Error {0}"
 	var msg := ""

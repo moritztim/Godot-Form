@@ -5,21 +5,21 @@ var _types: Array[String]
 
 func _enter_tree():
 	add_custom_types([
-		["Form", "Control", preload("nodes/Form.gd"), preload("icons/Form.svg")],
-		["Submit", "Button", preload("nodes/Submit.gd"), preload("icons/Submit.svg")],
-		["ValidatableLineEdit", "LineEdit", preload("nodes/ValidatableLineEdit.gd"), preload("icons/ValidatableLineEdit.svg")],
-		["ValidatableTextEdit", "TextEdit", preload("nodes/ValidatableTextEdit.gd"), preload("icons/ValidatableTextEdit.svg")],
-		["FormLabel", "Label", preload("nodes/FormLabel.gd"), preload("icons/FormLabel.svg")],
-		["Validator", "Resource", preload("nodes/Validator.gd"), preload("icons/Validator.svg")],
-		["Boundaries", "Resource", preload("nodes/Boundaries.gd"), preload("icons/Boundaries.svg")],		
-		["ListFilter", "Resource", preload("nodes/ListFilter.gd"), preload("icons/ListFilter.svg")],
-		["Protocol", "Resource", preload("nodes/Protocol.gd"), preload("icons/Protocol.svg")],
-		["FileProtocol", "Resource", preload("res://addons/form/nodes/Protocols/FileProtocol.gd"), preload("icons/FileProtocol.svg")],
-		["NetworkProtocol", "Resource", preload("nodes/Protocols/NetworkProtocol.gd"), preload("icons/NetworkProtocol.svg")],
-		["HttpProtocol", "Resource", preload("nodes/Protocols/HttpProtocol.gd"), preload("icons/HttpProtocol.svg")],
-		["MailProtocol", "Resource", preload("nodes/Protocols/MailProtocol.gd"), preload("icons/MailProtocol.svg")],
-		["SmtpMailProtocol", "Resource", preload("nodes/Protocols/SmtpMailProtocol.gd"), preload("icons/SmtpMailProtocol.svg")],
-		["MailsendSmtpMailProtocol", "Resource", preload("nodes/Protocols/MailsendSmtpMailProtocol.gd"), preload("icons/MailsendSmtpMailProtocol.svg")]
+		["Form", "Control", preload ("nodes/Form.gd"), preload ("icons/Form.svg")],
+		["Submit", "Button", preload ("nodes/Submit.gd"), preload ("icons/Submit.svg")],
+		["ValidatableLineEdit", "LineEdit", preload ("nodes/ValidatableLineEdit.gd"), preload ("icons/ValidatableLineEdit.svg")],
+		["ValidatableTextEdit", "TextEdit", preload ("nodes/ValidatableTextEdit.gd"), preload ("icons/ValidatableTextEdit.svg")],
+		["FormLabel", "Label", preload ("nodes/FormLabel.gd"), preload ("icons/FormLabel.svg")],
+		["Validator", "Resource", preload ("nodes/Validator.gd"), preload ("icons/Validator.svg")],
+		["Boundaries", "Resource", preload ("nodes/Boundaries.gd"), preload ("icons/Boundaries.svg")],
+		["ListFilter", "Resource", preload ("nodes/ListFilter.gd"), preload ("icons/ListFilter.svg")],
+		["Protocol", "Resource", preload ("nodes/Protocol.gd"), preload ("icons/Protocol.svg")],
+		["FileProtocol", "Resource", preload ("res://addons/form/nodes/Protocols/FileProtocol.gd"), preload ("icons/FileProtocol.svg")],
+		["NetworkProtocol", "Resource", preload ("nodes/Protocols/NetworkProtocol.gd"), preload ("icons/NetworkProtocol.svg")],
+		["HttpProtocol", "Resource", preload ("nodes/Protocols/HttpProtocol.gd"), preload ("icons/HttpProtocol.svg")],
+		["MailProtocol", "Resource", preload ("nodes/Protocols/MailProtocol.gd"), preload ("icons/MailProtocol.svg")],
+		["SmtpMailProtocol", "Resource", preload ("nodes/Protocols/SmtpMailProtocol.gd"), preload ("icons/SmtpMailProtocol.svg")],
+		["MailsendSmtpMailProtocol", "Resource", preload ("nodes/Protocols/MailsendSmtpMailProtocol.gd"), preload ("icons/MailsendSmtpMailProtocol.svg")]
 	])
 
 func add_custom_types(types: Array):

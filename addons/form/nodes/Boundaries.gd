@@ -23,4 +23,4 @@ class_name Boundaries extends Resource
 
 ## Determines if the subject is within the boundaries
 func has(subject: int) -> bool:
-	return (max == 0 || subject <= max) && (min == 0 || subject >= min)
+	return (max == 0||subject <= max)&&(min == 0||subject >= min)
