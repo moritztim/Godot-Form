@@ -10,12 +10,52 @@ class_name FormLabel extends Label
 			if input != null:
 				input.gui_input.disconnect(_on_gui_input)
 			input = new_val
+			nonstandard_input = false
 			mode = mode # run setter
 			indicate_required()
 			if validate_on_input && input != null:
 				input.gui_input.connect(_on_gui_input)
 		else:
-			printerr(get_class(),": input must be a input button or input field")
+			nonstandard_input = true
+
+## "The selected input is not an input according to Form.is_input() or null"
+var nonstandard_input := false
+
+## Must be compatible with the type of subject
+@export var validator: Validator:
+	set(new_val):
+		if validator != null && input != null:
+			if has_property(input, subject) && typeof(input[subject]) != new_val.get_type():
+				push_error("Validator must be compatible with the type of subject")
+				return
+			if input.get_theme_stylebox("normal") == null:
+				validator.style_valid = input.get_theme_stylebox("normal")
+		validator = new_val
+
+## Name of the property to validate
+## if not set, value property will be searched in
+## - Button: button_pressed
+## - LineEdit, TextEdit: text
+## - Range: value
+@export var subject: StringName:
+	set(new_val):
+		# can't do any validation here because every keystroke in the editor would trigger it
+		_subject = new_val
+	get:
+		if _subject == &"" && input != null:
+			if input is BaseButton:
+				subject = &"button_pressed"
+			elif input is LineEdit || input is TextEdit:
+				subject = &"text"
+			elif input is Range:
+				subject = &"value"
+			else:
+				subject = &""
+		return _subject
+
+## Internal storage subject
+var _subject: StringName
+
 ## "Input value must not be empty"
 @export var input_required := false:
 	set(new_val):
