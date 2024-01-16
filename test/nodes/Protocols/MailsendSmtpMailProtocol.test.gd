@@ -9,7 +9,7 @@ func run():
 	], jail)
 	compare(
 		actual,
-		[ "\\\"\\$\\%\\`\\!" ],
+		["\\\"\\$\\%\\`\\!"],
 		"sanitize shell args with SHELL_ESCAPE"
 	)
 	print("caught:\n", jail)
@@ -22,7 +22,7 @@ func run():
 	], jail)
 	compare(
 		actual,
-		[ MailsendSmtpMailProtocol.SHELL_WHITELIST, "", MailsendSmtpMailProtocol.SHELL_WHITELIST ],
+		[MailsendSmtpMailProtocol.SHELL_WHITELIST, "", MailsendSmtpMailProtocol.SHELL_WHITELIST],
 		"sanitize shell args with SHELL_WHITELIST"
 	)
 	print("caught:\n", jail)
