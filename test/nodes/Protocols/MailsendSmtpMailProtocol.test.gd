@@ -1,7 +1,7 @@
 class_name MailsendSmtpMailProtocolTest extends ClassTest
 
 func run():
-	var instance = MailsendSmtpMailProtocol.new() # TODO godot#86963
+	var instance = MailsendSmtpMailProtocol.new() # can't use class var. godot#86963
 	instance.sanitization = MailsendSmtpMailProtocol.Sanitization.SHELL_ESCAPE
 	var jail = []
 	var actual = instance.sanitize_shell_args([
