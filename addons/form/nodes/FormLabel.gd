@@ -84,6 +84,9 @@ func _enter_tree():
 	if !visibility_changed.is_connected(update_display_mode):
 		visibility_changed.connect(update_display_mode)
 
+func _ready():
+	indicate_required()
+
 ## Update label display mode based on visibility
 ## If the label is visible and the mode is either Mode.IN_INPUT or Mode.HIDDEN, the mode is set to Mode.SEPARATE.
 ## If the label is not visible and the mode is Mode.SEPARATE, the mode is set to Mode.HIDDEN.
@@ -99,6 +102,8 @@ func update_display_mode():
 
 ## Add or remove the required_hint if input_required
 func indicate_required():
+	if !is_node_ready():
+		return
 	# if * needed but not present
 	if input_required:
 		if required_hint not in ["", null]&&!text.ends_with(required_hint):
