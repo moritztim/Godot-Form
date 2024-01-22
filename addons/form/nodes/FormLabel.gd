@@ -100,9 +100,10 @@ func update_display_mode():
 ## Add or remove the required_hint if input_required
 func indicate_required():
 	# if * needed but not present
-	if input_required&&required_hint not in ["", null]&&!text.ends_with(required_hint):
-		# add
-		text += required_hint
+	if input_required:
+		if required_hint not in ["", null]&&!text.ends_with(required_hint):
+			# add
+			text += required_hint
 	# if * present but not needed
 	elif text.ends_with(required_hint):
 		# remove
