@@ -68,7 +68,7 @@ enum Mode {
 				if has_property(input, prop):
 					if mode == Mode.IN_INPUT:
 						input[prop] = text
-					else:
+					elif input[prop] == text:
 						input[prop] = ""
 					found = true
 					break
