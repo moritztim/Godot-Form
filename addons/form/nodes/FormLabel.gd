@@ -67,15 +67,19 @@ enum Mode {
 			for prop in ["placeholder_text", "text"]:
 				if has_property(input, prop):
 					if mode == Mode.IN_INPUT:
+						if input[prop] != text:
+							input_text_backup = input[prop]
 						input[prop] = text
 					elif input[prop] == text:
-						input[prop] = ""
+						input[prop] = input_text_backup
 					found = true
 					break
 			if !found&&mode == Mode.IN_INPUT:
 				push_error("Input ", input.get_instance_id(), " has no placeholder_text or text property")
 				mode = Mode.SEPARATE
 				visible = true
+
+var input_text_backup := ""
 
 ## Sets the label text to the input's name if it is empty and runs necessary setters
 func _enter_tree():
