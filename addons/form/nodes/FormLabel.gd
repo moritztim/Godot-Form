@@ -158,8 +158,10 @@ func indicate_validity(
 				print(msg)
 	return valid
 
-## Return validity of "Subject has property_name and it is not a method"
+## Return validity of "Subject exist, has property_name and property_name is not a method"
 func has_property(subject: Object, property_name: StringName) -> bool:
+	if subject == null:
+		return false
 	return property_name in subject&&!subject.has_method(property_name)
 
 ## Indicate validity on GUI input if event is relevant and validate_on_input
