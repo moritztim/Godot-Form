@@ -76,12 +76,7 @@ var valid := false
 ## Broken Rules with names and relevant value
 var broken_rules := {}
 ## Compiled custom regex
-var user_regex: RegEx
-
-## Compiles the custom regex
-func _init() -> void:
-	user_regex = RegEx.new()
-	user_regex.compile(custom)
+var user_regex: RegEx = RegEx.new()
 
 ## Validates given text and updates valid property
 func _on_text_changed(
@@ -159,12 +154,22 @@ func validate(
 		predefined_regex_result = true
 
 	##-- user_regex --##
-	if user_regex not in ["", null, ".*"]:
+	if user_regex.compile(custom) == OK and user_regex.is_valid() \
+	and user_regex.get_pattern() not in ["", null, ".*"]:
 		if require_single_match:
 			var matches = user_regex.search_all(subject)
 			if matches != null&&matches.size() == 1&&matches[0].get_string() == subject.strip_edges():
 				return true
 			return predefined_regex_result||bool(behaviour)
+
 		elif user_regex.search(subject) != null:
-				return true
-	return true
+			return true
+		
+		broken_rules["custom"] = 'custom'
+		return false
+	elif user_regex.get_pattern() in ["", null, ".*"]:		
+		return true
+	else:
+		push_warning('Incorrect custom RegEx pattern was set to: ', resource_path)
+
+	return false # Always returns false if not able to validate in any way.
