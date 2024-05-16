@@ -14,6 +14,11 @@ const REGEX_LIB = [
 	# source: ihateregex.io/expr/phone
 ]
 
+## A list of redundant regex patterns that don't need to be checked.
+## This is used to avoid unnecessary checks when the custom regex is empty.
+const REDUNDANT_REGEX = ["", null, ".*"]
+
+
 @export_group("Rules")
 
 @export_subgroup("Simple Rules")
@@ -155,7 +160,7 @@ func validate(
 
 	##-- user_regex --##
 	if user_regex.compile(custom) == OK and user_regex.is_valid() \
-	and user_regex.get_pattern() not in ["", null, ".*"]:
+	and user_regex.get_pattern() not in REDUNDANT_REGEX:
 		if require_single_match:
 			var matches = user_regex.search_all(subject)
 			if matches != null&&matches.size() == 1&&matches[0].get_string() == subject.strip_edges():
@@ -167,7 +172,7 @@ func validate(
 		
 		broken_rules["custom"] = custom
 		return false
-	elif user_regex.get_pattern() in ["", null, ".*"]:		
+	elif user_regex.get_pattern() in REDUNDANT_REGEX:		
 		return true
 	else:
 		push_warning('Incorrect custom RegEx pattern was set to: ', resource_path)
