@@ -165,7 +165,7 @@ func validate(
 		elif user_regex.search(subject) != null:
 			return true
 		
-		broken_rules["custom"] = 'custom'
+		broken_rules["custom"] = custom
 		return false
 	elif user_regex.get_pattern() in ["", null, ".*"]:		
 		return true
